@@ -32,7 +32,7 @@ public class Dish extends NamedEntity{
     @NotNull
     private Restaurant restaurant;
 
-    @Column(name = "menu_date",nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "menu_date",nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate menuDate = LocalDate.now();

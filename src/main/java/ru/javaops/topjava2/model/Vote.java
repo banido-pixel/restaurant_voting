@@ -14,21 +14,21 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Table(name = "votes",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"voter_id", "vote_date"},
+        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "vote_date"},
         name = "uk_user_vote"))
 public class Vote extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    private User voter;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
     private Restaurant restaurant;
 
-    @Column(name = "vote_date", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "vote_date", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate date;
