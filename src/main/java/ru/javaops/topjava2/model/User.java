@@ -59,7 +59,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
-    @OneToMany (fetch = FetchType.LAZY)
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "user")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Vote> vote;
 
