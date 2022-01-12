@@ -6,10 +6,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.Range;
 import ru.javaops.topjava2.HasId;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
@@ -20,10 +22,6 @@ import java.util.List;
 @ToString(callSuper = true)
 public class Restaurant extends NamedEntity implements HasId {
 
-    @Column(name = "votes_number", columnDefinition = "int default 0")
-    @Range(min = 0)
-    private int votesNumber = 0;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Dish> menu;
@@ -31,5 +29,4 @@ public class Restaurant extends NamedEntity implements HasId {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Vote> votes;
-
 }
