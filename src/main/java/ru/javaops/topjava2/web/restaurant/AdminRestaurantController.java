@@ -18,7 +18,6 @@ import java.util.Optional;
 import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
 @RestController
-@Slf4j
 @RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestaurantController extends AbstractRestaurantController {
 

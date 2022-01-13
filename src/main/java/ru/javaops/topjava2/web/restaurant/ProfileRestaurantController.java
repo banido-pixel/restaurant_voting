@@ -9,7 +9,6 @@ import ru.javaops.topjava2.model.Restaurant;
 import java.util.List;
 
 @RestController
-@Slf4j
 @RequestMapping(value = ProfileRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileRestaurantController extends AbstractRestaurantController{
 
