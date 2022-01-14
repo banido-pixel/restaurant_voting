@@ -1,5 +1,6 @@
 package ru.javaops.topjava2.web.dish;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Dish;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,6 +21,12 @@ public class AdminDishController extends AbstractDishController {
     @GetMapping
     public List<Dish> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
+    }
+
+    @GetMapping("/previous")
+    public List<Dish> getAllWithDate(@PathVariable int restaurantId,
+                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return super.getAllWithDate(restaurantId, date);
     }
 
     @GetMapping("/{id}")

@@ -6,6 +6,7 @@ import ru.javaops.topjava2.model.Dish;
 import ru.javaops.topjava2.repository.DishRepository;
 import ru.javaops.topjava2.repository.RestaurantRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,10 @@ public class DishService {
 
     public Optional<List<Dish>> getAll(int restaurantId) {
         return dishRepository.getAll(restaurantId);
+    }
+
+    public Optional<List<Dish>> getAllWithDate(int restaurantId, LocalDate date) {
+        return dishRepository.getAllWithDate(restaurantId, date);
     }
 
     public void delete(int id, int restaurantId){

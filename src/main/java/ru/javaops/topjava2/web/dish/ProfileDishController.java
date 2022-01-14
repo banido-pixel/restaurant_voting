@@ -1,12 +1,11 @@
 package ru.javaops.topjava2.web.dish;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javaops.topjava2.model.Dish;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,5 +17,11 @@ public class ProfileDishController extends AbstractDishController{
     @GetMapping
     public List<Dish> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
+    }
+
+    @GetMapping("/previous")
+    public List<Dish> getAllWithDate(@PathVariable int restaurantId,
+                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return super.getAllWithDate(restaurantId, date);
     }
 }

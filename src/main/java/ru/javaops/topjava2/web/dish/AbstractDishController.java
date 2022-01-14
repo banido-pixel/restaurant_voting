@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import ru.javaops.topjava2.model.Dish;
 import ru.javaops.topjava2.service.DishService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
@@ -19,6 +20,11 @@ public class AbstractDishController {
     public List<Dish> getAll(int restaurantId) {
         log.info("getAll dishes for restaurant with id = {}", restaurantId);
         return dishService.getAll(restaurantId).orElseThrow();
+    }
+
+    public List<Dish> getAllWithDate(int restaurantId, LocalDate date) {
+        log.info("getAll dishes for restaurant with id = {}", restaurantId);
+        return dishService.getAllWithDate(restaurantId, date).orElseThrow();
     }
 
     public Dish get(int id, int restaurantId) {
