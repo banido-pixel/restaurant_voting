@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.repository.RestaurantRepository;
+import ru.javaops.topjava2.to.RestaurantTo;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +19,9 @@ public abstract class AbstractRestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public List<Restaurant> getAll() {
+    public List<RestaurantTo> getAll() {
         log.info("getAll restaurants");
-        return Optional.of(restaurantRepository.findAll()).orElseThrow();
+        return restaurantRepository.getAll().orElseThrow();
     }
 
     public ResponseEntity<Restaurant> get(int id){

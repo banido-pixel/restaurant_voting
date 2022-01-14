@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.repository.RestaurantRepository;
+import ru.javaops.topjava2.to.RestaurantTo;
 
 import java.net.URI;
 import java.util.List;
@@ -24,7 +25,7 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     static final String REST_URL = "api/admin/restaurants";
 
     @GetMapping
-    public List<Restaurant> getAll() {
+    public List<RestaurantTo> getAll() {
         return super.getAll();
     }
 
