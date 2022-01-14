@@ -23,7 +23,7 @@ public class AbstractDishController {
     }
 
     public List<Dish> getAllWithDate(int restaurantId, LocalDate date) {
-        log.info("getAll dishes for restaurant with id = {}", restaurantId);
+        log.info("getAll dishes with date {} for restaurant with id = {}", date, restaurantId);
         return dishService.getAllWithDate(restaurantId, date).orElseThrow();
     }
 
@@ -44,7 +44,7 @@ public class AbstractDishController {
         checkNotFoundWithId(dishService.save(dish, restaurantId), id);
     }
 
-    public Dish create(Dish dish, int restaurantId){
+    public Dish create(Dish dish, int restaurantId) {
         log.info("create dish {} for restaurant with id = {}", dish, restaurantId);
         checkNew(dish);
         Assert.notNull(dish, "dish must not be null");
