@@ -61,7 +61,7 @@ public class VoteController {
         checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
     }
 
-    @PostMapping(value = "/restaurants/{restaurantId}/")
+    @PostMapping(value = "/restaurants/{restaurantId}/votes")
     public ResponseEntity<Vote> createWithLocation(@PathVariable int restaurantId) {
         int userId = SecurityUtil.authId();
         log.info("create vote for user {} for restaurant {}", userId, restaurantId);
