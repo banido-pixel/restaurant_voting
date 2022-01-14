@@ -8,6 +8,7 @@ import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.repository.RestaurantRepository;
 import ru.javaops.topjava2.to.RestaurantTo;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,11 @@ public abstract class AbstractRestaurantController {
     public List<RestaurantTo> getAll() {
         log.info("getAll restaurants");
         return restaurantRepository.getAll().orElseThrow();
+    }
+
+    public List<RestaurantTo> getAllWithDate(LocalDate date) {
+        log.info("getAll restaurants with date {}", date);
+        return restaurantRepository.getAllWithDate(date).orElseThrow();
     }
 
     public ResponseEntity<Restaurant> get(int id){

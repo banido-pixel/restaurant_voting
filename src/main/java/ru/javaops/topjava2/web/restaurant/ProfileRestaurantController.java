@@ -1,14 +1,13 @@
 package ru.javaops.topjava2.web.restaurant;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.to.RestaurantTo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -20,6 +19,11 @@ public class ProfileRestaurantController extends AbstractRestaurantController{
     @GetMapping
     public List<RestaurantTo> getAll() {
         return super.getAll();
+    }
+
+    @GetMapping("/previous")
+    public List<RestaurantTo> getAllWithDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return super.getAllWithDate(date);
     }
 
     @GetMapping("/{id}")
