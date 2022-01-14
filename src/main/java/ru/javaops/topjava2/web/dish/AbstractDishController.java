@@ -3,8 +3,6 @@ package ru.javaops.topjava2.web.dish;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.javaops.topjava2.model.Dish;
 import ru.javaops.topjava2.service.DishService;
 

@@ -1,22 +1,15 @@
 package ru.javaops.topjava2.web.restaurant;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Restaurant;
-import ru.javaops.topjava2.repository.RestaurantRepository;
 import ru.javaops.topjava2.to.RestaurantTo;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
-import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
 @RestController
 @RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

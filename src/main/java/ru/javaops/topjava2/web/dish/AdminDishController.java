@@ -3,15 +3,12 @@ package ru.javaops.topjava2.web.dish;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Dish;
 
 import java.net.URI;
 import java.util.List;
-
-import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
 @RestController
 @RequestMapping(value = AdminDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)

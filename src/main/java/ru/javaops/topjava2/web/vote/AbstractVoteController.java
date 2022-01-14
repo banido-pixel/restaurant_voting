@@ -2,16 +2,11 @@ package ru.javaops.topjava2.web.vote;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Vote;
 import ru.javaops.topjava2.service.VoteService;
 import ru.javaops.topjava2.web.SecurityUtil;
 
-import java.net.URI;
 import java.time.LocalDate;
 
 import static ru.javaops.topjava2.util.validation.ValidationUtil.assureIdConsistent;
