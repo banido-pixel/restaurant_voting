@@ -14,19 +14,19 @@ import java.util.List;
 @RequestMapping(value = ProfileRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileRestaurantController extends AbstractRestaurantController{
 
-    static final String REST_URL = "api/restaurants";
+    static final String REST_URL = "/api/restaurants/";
 
     @GetMapping
     public List<RestaurantTo> getAll() {
         return super.getAll();
     }
 
-    @GetMapping("/previous")
+    @GetMapping("previous")
     public List<RestaurantTo> getAllWithDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(date);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Restaurant> get(@PathVariable int id) {
         return super.get(id);
     }

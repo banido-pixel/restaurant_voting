@@ -16,31 +16,31 @@ import java.util.List;
 @RequestMapping(value = AdminDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminDishController extends AbstractDishController {
 
-    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/dishes";
+    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/dishes/";
 
     @GetMapping
     public List<Dish> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
     }
 
-    @GetMapping("/previous")
+    @GetMapping("previous")
     public List<Dish> getAllWithDate(@PathVariable int restaurantId,
                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(restaurantId, date);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Dish get(@PathVariable int id, @PathVariable int restaurantId) {
         return super.get(id, restaurantId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id, @PathVariable int restaurantId) {
         super.delete(id, restaurantId);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
         super.update(dish, id, restaurantId);
@@ -51,7 +51,7 @@ public class AdminDishController extends AbstractDishController {
         Dish created = super.create(dish, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(REST_URL + "/{id}")
+                .path(REST_URL + "{id}")
                 .buildAndExpand(restaurantId, created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);

@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(value = AdminVoteHistoryController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminVoteHistoryController extends AbstractVoteHistoryController{
 
-    static final String REST_URL = "/api/admin/votes";
+    static final String REST_URL = "/api/admin/votes/";
 
     @GetMapping()
     public List<Vote> getAllForUser() {

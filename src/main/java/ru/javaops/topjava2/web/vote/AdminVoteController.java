@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @RequestMapping(value = AdminVoteController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminVoteController extends AbstractVoteController {
 
-    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/votes";
+    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/votes/";
 
     @GetMapping()
     public Integer getAmountForRestaurantWithDate(@PathVariable int restaurantId,
@@ -23,13 +23,13 @@ public class AdminVoteController extends AbstractVoteController {
         return super.getAmountForRestaurantWithDate(restaurantId, date);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id, @PathVariable int restaurantId) {
         super.delete(id, restaurantId);
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody Vote vote, @PathVariable int id, @PathVariable int restaurantId) {
         super.update(vote, id, restaurantId);
@@ -40,7 +40,7 @@ public class AdminVoteController extends AbstractVoteController {
         Vote created = super.create(restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/restaurants/{restaurantId}/votes/{id}")
+                .path(REST_URL + "{id}")
                 .buildAndExpand(restaurantId, created.getId()).toUri();
 
         return ResponseEntity.created(uriOfNewResource).body(created);

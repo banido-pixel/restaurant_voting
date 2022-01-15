@@ -12,14 +12,14 @@ import java.util.List;
 @RequestMapping(value = ProfileDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileDishController extends AbstractDishController{
 
-    static final String REST_URL = "/api/restaurants/{restaurantId}/dishes";
+    static final String REST_URL = "/api/restaurants/{restaurantId}/dishes/";
 
     @GetMapping
     public List<Dish> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
     }
 
-    @GetMapping("/previous")
+    @GetMapping("previous")
     public List<Dish> getAllWithDate(@PathVariable int restaurantId,
                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(restaurantId, date);
