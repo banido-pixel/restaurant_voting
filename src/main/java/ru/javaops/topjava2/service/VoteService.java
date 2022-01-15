@@ -27,10 +27,6 @@ public class VoteService {
         return voteRepository.getAllForUser(userId);
     }
 
-    public Integer getAmountForRestaurantWithDate(int restaurantId, LocalDate date) {
-        return voteRepository.getAmountForRestaurantWithDate(restaurantId, date);
-    }
-
     public Optional<Vote> get(int id, int userId) {
         return voteRepository.get(id, userId);
     }

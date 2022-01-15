@@ -17,12 +17,6 @@ public class AdminVoteController extends AbstractVoteController {
 
     static final String REST_URL = "/api/admin/restaurants/{restaurantId}/votes/";
 
-    @GetMapping()
-    public Integer getAmountForRestaurantWithDate(@PathVariable int restaurantId,
-                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return super.getAmountForRestaurantWithDate(restaurantId, date);
-    }
-
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id, @PathVariable int restaurantId) {
