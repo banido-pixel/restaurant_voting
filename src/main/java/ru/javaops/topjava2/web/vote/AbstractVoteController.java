@@ -18,11 +18,6 @@ public class AbstractVoteController {
     @Autowired
     private VoteService voteService;
 
-    public Integer getAmountForRestaurantWithDate(int restaurantId, LocalDate date) {
-        log.info("get all votes for restaurant {} with date {}", restaurantId, date);
-        return voteService.getAmountForRestaurantWithDate(restaurantId, date);
-    }
-
     public void delete(int id, int restaurantId) {
         int userId = SecurityUtil.authId();
         log.info("delete vote {} for user {} for restaurant with id = {}", id, userId, restaurantId);
