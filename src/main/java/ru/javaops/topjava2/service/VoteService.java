@@ -23,8 +23,8 @@ public class VoteService {
         this.userRepository = userRepository;
     }
 
-    public List<Vote> getAllForUser(int userId) {
-        return voteRepository.getAllForUser(userId);
+    public List<Vote> getAll(int userId) {
+        return voteRepository.getAll(userId);
     }
 
     public Optional<Vote> get(int id, int userId) {
