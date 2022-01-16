@@ -3,9 +3,6 @@ package ru.javaops.topjava2.web.vote;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
@@ -16,10 +13,6 @@ import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
 import ru.javaops.topjava2.web.FixedLegalClockConfig;
 import ru.javaops.topjava2.web.GlobalExceptionHandler;
-
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -33,7 +26,6 @@ import static ru.javaops.topjava2.web.vote.VoteTestData.*;
 
 @SpringBootTest(classes = FixedLegalClockConfig.class)
 class ProfileVoteControllerTest extends AbstractControllerTest {
-
 
     @Autowired
     private VoteRepository voteRepository;
@@ -55,6 +47,20 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
         assertFalse(voteRepository.findById(VOTE_ID).isPresent());
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void update() throws Exception {
+        Vote updated = getUpdated();
+        updated.setId(null);
+        perform(MockMvcRequestBuilders.put(REST_URL + VOTE_ID)
+                .param("restaurantId", RESTAURANT_ID + 1 + "")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(updated)))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+        VOTE_MATCHER.assertMatch(voteRepository.getById(VOTE_ID), getUpdated());
     }
 
     @Test
