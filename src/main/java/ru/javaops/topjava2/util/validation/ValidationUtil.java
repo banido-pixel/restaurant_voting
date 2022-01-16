@@ -1,6 +1,9 @@
 package ru.javaops.topjava2.util.validation;
 
+import lombok.AllArgsConstructor;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 import ru.javaops.topjava2.HasId;
@@ -8,9 +11,11 @@ import ru.javaops.topjava2.error.IllegalRequestDataException;
 import ru.javaops.topjava2.error.IllegalTimeException;
 import ru.javaops.topjava2.error.NotFoundException;
 
+import java.time.Clock;
 import java.time.LocalTime;
 
 @UtilityClass
+@Slf4j
 public class ValidationUtil {
 
     public static void checkNew(HasId bean) {
@@ -28,8 +33,9 @@ public class ValidationUtil {
         }
     }
 
-    public static void assureTimeValid(String entity, String operationType){
-        LocalTime time = LocalTime.now();
+    public static void assureTimeValid(String entity, String operationType, Clock clock){
+        LocalTime time = LocalTime.now(clock);
+        log.error("current time{}", time);
         if(time.isAfter(LocalTime.of(11,0))){
             throw new IllegalTimeException( entity + " cannot be " + operationType + "d after 11:00");
         }

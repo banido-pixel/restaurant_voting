@@ -7,7 +7,8 @@ import ru.javaops.topjava2.model.Vote;
 import ru.javaops.topjava2.service.VoteService;
 import ru.javaops.topjava2.web.SecurityUtil;
 
-import java.time.LocalDate;
+import java.time.Clock;
+import java.util.List;
 
 import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
@@ -17,9 +18,18 @@ public class AbstractVoteController {
     @Autowired
     private VoteService voteService;
 
-    public void delete(int id, int restaurantId) {
+    @Autowired
+    private Clock clock;
+
+    public List<Vote> getAll() {
         int userId = SecurityUtil.authId();
-        log.info("delete vote {} for user {} for restaurant with id = {}", id, userId, restaurantId);
+        log.info("get vote history for user {}", userId);
+        return voteService.getAll(userId);
+    }
+
+    public void delete(int id) {
+        int userId = SecurityUtil.authId();
+        log.info("delete vote {} for user {}", id, userId);
         voteService.delete(id, userId);
     }
 
@@ -28,7 +38,7 @@ public class AbstractVoteController {
         log.info("update vote {} for user {} for restaurant {}", vote, userId, restaurantId);
         assureIdConsistent(vote, id);
         Assert.notNull(vote, "vote must not be null");
-        assureTimeValid(Vote.class.getSimpleName(), "update");
+        assureTimeValid(Vote.class.getSimpleName(), "update", clock);
         checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
     }
 
@@ -36,7 +46,7 @@ public class AbstractVoteController {
         int userId = SecurityUtil.authId();
         log.info("create vote for user {} for restaurant {}", userId, restaurantId);
         Vote vote = new Vote();
-        assureTimeValid(Vote.class.getSimpleName(), "create");
+        assureTimeValid(Vote.class.getSimpleName(), "create", clock);
         return voteService.save(vote, userId, restaurantId);
     }
 }

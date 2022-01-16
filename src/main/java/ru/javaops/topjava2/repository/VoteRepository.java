@@ -28,5 +28,5 @@ public interface VoteRepository extends BaseRepository<Vote> {
     Optional<Vote> get(@Param("id") int id, @Param("userId") int user_id);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.user.id=:userId ORDER BY v.date DESC")
-    List<Vote> getAllForUser(@Param("userId") int user_id);
+    List<Vote> getAll(@Param("userId") int user_id);
 }
