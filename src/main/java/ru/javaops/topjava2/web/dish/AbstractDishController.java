@@ -6,6 +6,7 @@ import org.springframework.util.Assert;
 import ru.javaops.topjava2.model.Dish;
 import ru.javaops.topjava2.service.DishService;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,6 +17,9 @@ public class AbstractDishController {
 
     @Autowired
     private DishService dishService;
+
+    @Autowired
+    private Clock clock;
 
     public List<Dish> getAll(int restaurantId) {
         log.info("getAll dishes for restaurant with id = {}", restaurantId);
@@ -41,7 +45,7 @@ public class AbstractDishController {
         log.info("update dish {} for restaurant with id = {}", dish, restaurantId);
         assureIdConsistent(dish, id);
         Assert.notNull(dish, "dish must not be null");
-        assureTimeValid(Dish.class.getSimpleName(), "update");
+        assureTimeValid(Dish.class.getSimpleName(), "update", clock);
         checkNotFoundWithId(dishService.save(dish, restaurantId), id);
     }
 
@@ -49,7 +53,7 @@ public class AbstractDishController {
         log.info("create dish {} for restaurant with id = {}", dish, restaurantId);
         checkNew(dish);
         Assert.notNull(dish, "dish must not be null");
-        assureTimeValid(Dish.class.getSimpleName(), "create");
+        assureTimeValid(Dish.class.getSimpleName(), "create", clock);
         return dishService.save(dish, restaurantId);
     }
 }
