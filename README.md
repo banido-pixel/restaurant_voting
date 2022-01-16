@@ -15,5 +15,5 @@ Build a voting system for deciding where to have lunch.
 Each restaurant provides a new menu each day.
 
 Swagger:
-*http://localhost:8080/swagger-ui.html
-*http://localhost:8080/v3/api-docs
+* http://localhost:8080/swagger-ui.html
+* http://localhost:8080/v3/api-docs
