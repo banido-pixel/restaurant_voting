@@ -15,7 +15,6 @@ import java.time.Clock;
 import java.time.LocalTime;
 
 @UtilityClass
-@Slf4j
 public class ValidationUtil {
 
     public static void checkNew(HasId bean) {
@@ -35,7 +34,6 @@ public class ValidationUtil {
 
     public static void assureTimeValid(String entity, String operationType, Clock clock){
         LocalTime time = LocalTime.now(clock);
-        log.error("current time{}", time);
         if(time.isAfter(LocalTime.of(11,0))){
             throw new IllegalTimeException( entity + " cannot be " + operationType + "d after 11:00");
         }
