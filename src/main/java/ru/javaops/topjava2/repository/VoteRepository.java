@@ -24,7 +24,7 @@ public interface VoteRepository extends BaseRepository<Vote> {
         checkModification(delete(id, userId), id);
     }
 
-    @Query("SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id=:id AND v.user.id=:userId")
     Optional<Vote> get(@Param("id") int id, @Param("userId") int user_id);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.user.id=:userId ORDER BY v.date DESC")
