@@ -1,5 +1,6 @@
 package ru.javaops.topjava2.web.vote;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +19,19 @@ public class AdminVoteController extends AbstractVoteController {
     static final String REST_URL = "/api/admin/votes/";
 
     @GetMapping()
+    @Operation(summary = "getAll")
     public List<Vote> getAll() {
         return super.getAll();
     }
 
     @GetMapping("{id}")
+    @Operation(summary = "get")
     public Vote get(@PathVariable int id) {
         return super.get(id);
     }
 
     @DeleteMapping("{id}")
+    @Operation(summary = "delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         super.delete(id);
@@ -35,11 +39,13 @@ public class AdminVoteController extends AbstractVoteController {
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "update")
     public void update(@Valid @RequestBody Vote vote, @PathVariable int id, @RequestParam int restaurantId) {
         super.update(vote, id, restaurantId);
     }
 
     @PostMapping()
+    @Operation(summary = "create")
     public ResponseEntity<Vote> createWithLocation(@RequestParam int restaurantId) {
         Vote created = super.create(restaurantId);
 

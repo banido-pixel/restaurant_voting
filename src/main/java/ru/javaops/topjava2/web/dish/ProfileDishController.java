@@ -1,5 +1,6 @@
 package ru.javaops.topjava2.web.dish;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +16,13 @@ public class ProfileDishController extends AbstractDishController{
     static final String REST_URL = "/api/restaurants/{restaurantId}/dishes/";
 
     @GetMapping
+    @Operation(summary = "getAll")
     public List<Dish> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
     }
 
     @GetMapping("previous")
+    @Operation(summary = "getAllWithDate")
     public List<Dish> getAllWithDate(@PathVariable int restaurantId,
                                      @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(restaurantId, date);
