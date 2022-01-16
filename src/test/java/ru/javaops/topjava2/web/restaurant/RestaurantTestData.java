@@ -8,6 +8,7 @@ public class RestaurantTestData {
             MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class);
 
     public static final int RESTAURANT_ID = 1;
+    public static final int NOT_FOUND = 120;
 
     public static final Restaurant restaurant1 = new Restaurant(RESTAURANT_ID, "Арарат");
     public static final Restaurant restaurant2 = new Restaurant(RESTAURANT_ID + 1, "Белый Аист");

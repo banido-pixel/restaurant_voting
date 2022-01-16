@@ -22,6 +22,7 @@ import ru.javaops.topjava2.util.validation.ValidationUtil;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.MESSAGE;
@@ -68,6 +69,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> persistException(WebRequest request, EntityNotFoundException ex) {
         log.error("EntityNotFoundException: {}", ex.getMessage());
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<?> notFoundException(WebRequest request, NoSuchElementException ex) {
+        log.error("NoSuchElementException: {}", ex.getMessage());
+        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

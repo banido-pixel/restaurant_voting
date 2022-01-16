@@ -37,6 +37,14 @@ class AdminRestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
+    void deleteNotFound() throws Exception {
+        perform(MockMvcRequestBuilders.delete(REST_URL + NOT_FOUND))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
     void update() throws Exception {
         Restaurant updated = getUpdated();
         updated.setId(null);
@@ -46,6 +54,29 @@ class AdminRestaurantControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isNoContent());
         RESTAURANT_MATCHER.assertMatch(restaurantRepository.getById(RESTAURANT_ID), getUpdated());
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void updateInvalid() throws Exception {
+        Restaurant invalid = getUpdated();
+        invalid.setName("");
+        perform(MockMvcRequestBuilders.put(REST_URL + NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(invalid)))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void createInvalid() throws Exception {
+        Restaurant newRestaurant = getNew();
+        newRestaurant.setName("");
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newRestaurant)))
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
