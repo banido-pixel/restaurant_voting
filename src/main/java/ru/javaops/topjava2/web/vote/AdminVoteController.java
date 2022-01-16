@@ -22,6 +22,11 @@ public class AdminVoteController extends AbstractVoteController {
         return super.getAll();
     }
 
+    @GetMapping("{id}")
+    public Vote get(@PathVariable int id) {
+        return super.get(id);
+    }
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {

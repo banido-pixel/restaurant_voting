@@ -27,6 +27,12 @@ public abstract class AbstractVoteController {
         return voteService.getAll(userId);
     }
 
+    public Vote get(int id) {
+        int userId = SecurityUtil.authId();
+        log.info("get vote history for user {}", userId);
+        return voteService.get(id, userId).orElseThrow();
+    }
+
     public void delete(int id) {
         int userId = SecurityUtil.authId();
         log.info("delete vote {} for user {}", id, userId);

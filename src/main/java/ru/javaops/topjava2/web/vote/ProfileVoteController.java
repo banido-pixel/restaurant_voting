@@ -3,6 +3,7 @@ package ru.javaops.topjava2.web.vote;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javaops.topjava2.model.Vote;
@@ -22,6 +23,11 @@ public class ProfileVoteController extends AbstractVoteController {
         return super.getAll();
     }
 
+    @GetMapping("{id}")
+    public Vote get(@PathVariable int id) {
+        return super.get(id);
+    }
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
@@ -29,6 +35,7 @@ public class ProfileVoteController extends AbstractVoteController {
     }
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody Vote vote, @PathVariable int id, @RequestParam int restaurantId) {
         super.update(vote, id, restaurantId);
