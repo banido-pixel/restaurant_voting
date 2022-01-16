@@ -10,9 +10,12 @@ import ru.javaops.topjava2.model.Restaurant;
 import ru.javaops.topjava2.repository.RestaurantRepository;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
+import ru.javaops.topjava2.web.GlobalExceptionHandler;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javaops.topjava2.web.restaurant.AdminRestaurantController.REST_URL;
 import static ru.javaops.topjava2.web.restaurant.RestaurantTestData.*;
@@ -58,5 +61,17 @@ class AdminRestaurantControllerTest extends AbstractControllerTest {
         newRestaurant.setId(newId);
         RESTAURANT_MATCHER.assertMatch(created, newRestaurant);
         RESTAURANT_MATCHER.assertMatch(restaurantRepository.getById(newId), newRestaurant);
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void createDuplicateName() throws Exception {
+        Restaurant newRestaurant = restaurantRepository.getById(RESTAURANT_ID);
+        newRestaurant.setId(null);
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newRestaurant)))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(content().string(containsString(GlobalExceptionHandler.EXCEPTION_DUPLICATE_RESTAURANT_NAME)));
     }
 }

@@ -12,7 +12,9 @@ import ru.javaops.topjava2.repository.DishRepository;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
 import ru.javaops.topjava2.web.FixedLegalClockConfig;
+import ru.javaops.topjava2.web.GlobalExceptionHandler;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -59,12 +61,12 @@ class AdminDishControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        DISH_MATCHER.assertMatch(dishRepository.getById(DISH_ID),getUpdated());
+        DISH_MATCHER.assertMatch(dishRepository.getById(DISH_ID), getUpdated());
     }
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
-    void createWithLocation() throws Exception{
+    void createWithLocation() throws Exception {
         Dish newDish = getNew();
         ResultActions actions = perform(MockMvcRequestBuilders.post(TEST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -74,7 +76,19 @@ class AdminDishControllerTest extends AbstractControllerTest {
         Dish created = DISH_MATCHER.readFromJson(actions);
         int newId = created.id();
         newDish.setId(newId);
-        DISH_MATCHER.assertMatch(created,newDish);
-        DISH_MATCHER.assertMatch(dishRepository.getById(newId),newDish);
+        DISH_MATCHER.assertMatch(created, newDish);
+        DISH_MATCHER.assertMatch(dishRepository.getById(newId), newDish);
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
+    void createDuplicateName() throws Exception {
+        Dish newDish = dishRepository.getById(DISH_ID);
+        newDish.setId(null);
+        perform(MockMvcRequestBuilders.post(TEST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newDish)))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(content().string(containsString(GlobalExceptionHandler.EXCEPTION_DUPLICATE_DISH_NAME)));
     }
 }

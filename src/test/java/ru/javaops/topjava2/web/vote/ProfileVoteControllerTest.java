@@ -15,11 +15,13 @@ import ru.javaops.topjava2.repository.VoteRepository;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
 import ru.javaops.topjava2.web.FixedLegalClockConfig;
+import ru.javaops.topjava2.web.GlobalExceptionHandler;
 
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -70,5 +72,17 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
         newVote.setId(newId);
         VOTE_MATCHER.assertMatch(created, newVote);
         VOTE_MATCHER.assertMatch(voteRepository.getById(newId), newVote);
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void createSecondPerDay() throws Exception {
+        Vote newVote = getNew();
+        perform(MockMvcRequestBuilders.post(REST_URL)
+                .param("restaurantId", "" + RESTAURANT_ID)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newVote)))
+                .andExpect(status().isUnprocessableEntity())
+                .andExpect(content().string(containsString(GlobalExceptionHandler.EXCEPTION_SECOND_VOTE_PER_DATE)));
     }
 }
