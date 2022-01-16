@@ -5,7 +5,7 @@ import ru.javaops.topjava2.web.MatcherFactory;
 
 public class RestaurantTestData {
     public static final MatcherFactory.Matcher<Restaurant> RESTAURANT_MATCHER =
-            MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class);
+            MatcherFactory.usingEqualsComparator(Restaurant.class);
 
     public static final int RESTAURANT_ID = 1;
     public static final int NOT_FOUND = 120;

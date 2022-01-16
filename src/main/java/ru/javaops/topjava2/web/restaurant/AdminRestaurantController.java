@@ -20,8 +20,13 @@ public class AdminRestaurantController extends AbstractRestaurantController {
 
     static final String REST_URL = "/api/admin/restaurants/";
 
+    @GetMapping("rated")
+    public List<RestaurantTo> getAllWithVotes() {
+        return super.getAllWithVotes();
+    }
+
     @GetMapping
-    public List<RestaurantTo> getAll() {
+    public List<Restaurant> getAll() {
         return super.getAll();
     }
 

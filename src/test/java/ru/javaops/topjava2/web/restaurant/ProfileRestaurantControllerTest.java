@@ -17,6 +17,15 @@ class ProfileRestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
+    void getAll() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL))
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(RESTAURANT_MATCHER.contentJson(restaurant1, restaurant2, restaurant3));
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
     void get() throws Exception {
         perform(MockMvcRequestBuilders.get(REST_URL + RESTAURANT_ID))
                 .andExpect(status().isOk())

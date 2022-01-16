@@ -15,9 +15,9 @@ public interface RestaurantRepository extends BaseRepository<Restaurant> {
 
     @Query("SELECT new ru.javaops.topjava2.to.RestaurantTo(r.id, r.name, (" +
             "SELECT COUNT(v.date) FROM Vote v WHERE v.date=current_date AND v.restaurant.id=r.id)) FROM Restaurant r")
-    Optional<List<RestaurantTo>> getAll();
+    Optional<List<RestaurantTo>> getAllWithVotes();
 
     @Query("SELECT new ru.javaops.topjava2.to.RestaurantTo(r.id, r.name, (" +
             "SELECT COUNT(v.date) FROM Vote v WHERE v.date=:date AND v.restaurant.id=r.id)) FROM Restaurant r")
-    Optional<List<RestaurantTo>> getAllWithDate(@Param("date")LocalDate date);
+    Optional<List<RestaurantTo>> getAllWithDate(@Param("date") LocalDate date);
 }

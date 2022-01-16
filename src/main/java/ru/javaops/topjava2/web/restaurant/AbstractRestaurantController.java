@@ -20,9 +20,14 @@ public abstract class AbstractRestaurantController {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public List<RestaurantTo> getAll() {
+    public List<Restaurant> getAll() {
         log.info("getAll restaurants");
-        return restaurantRepository.getAll().orElseThrow();
+        return restaurantRepository.findAll();
+    }
+
+    public List<RestaurantTo> getAllWithVotes() {
+        log.info("getAll restaurants");
+        return restaurantRepository.getAllWithVotes().orElseThrow();
     }
 
     public List<RestaurantTo> getAllWithDate(LocalDate date) {
