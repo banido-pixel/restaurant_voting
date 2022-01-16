@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import ru.javaops.topjava2.HasId;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Getter
@@ -19,14 +18,6 @@ import java.util.List;
         uniqueConstraints =@UniqueConstraint(columnNames = {"name"}, name = "uk_restaurant_name"))
 @ToString(callSuper = true)
 public class Restaurant extends NamedEntity implements HasId {
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Dish> menu;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Vote> votes;
 
     public Restaurant(Integer id, String name) {
         super(id, name);

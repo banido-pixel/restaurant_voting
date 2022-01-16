@@ -59,10 +59,6 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
-    @OneToMany (fetch = FetchType.LAZY, mappedBy = "user")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Vote> vote;
-
     public User(User u) {
         this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
     }
