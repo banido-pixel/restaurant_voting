@@ -13,7 +13,7 @@ import java.util.List;
 import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
 @Slf4j
-public class AbstractVoteController {
+public abstract class AbstractVoteController {
 
     @Autowired
     private VoteService voteService;
