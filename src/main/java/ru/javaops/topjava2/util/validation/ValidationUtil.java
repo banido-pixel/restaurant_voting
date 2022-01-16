@@ -5,7 +5,7 @@ import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 import ru.javaops.topjava2.HasId;
 import ru.javaops.topjava2.error.IllegalRequestDataException;
-import ru.javaops.topjava2.util.exception.NotFoundException;
+import ru.javaops.topjava2.error.NotFoundException;
 
 @UtilityClass
 public class ValidationUtil {

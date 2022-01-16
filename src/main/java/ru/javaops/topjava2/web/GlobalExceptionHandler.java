@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import ru.javaops.topjava2.error.AppException;
 import ru.javaops.topjava2.util.validation.ValidationUtil;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -29,6 +31,13 @@ import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.M
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public static final String EXCEPTION_DUPLICATE_EMAIL = "User with this email already exists";
+    public static final String EXCEPTION_DUPLICATE_DISH_NAME = "Dish with this name and date already exists";
+    public static final String EXCEPTION_DUPLICATE_RESTAURANT_NAME = "Restaurant with this name already exists";
+
+    private static final Map<String, String> CONSTRAINTS_MAP = Map.of(
+            "uk_restaurant_name", EXCEPTION_DUPLICATE_RESTAURANT_NAME,
+            "uk_restaurant_menu_datetime", EXCEPTION_DUPLICATE_DISH_NAME
+    );
 
     private final ErrorAttributes errorAttributes;
 
@@ -57,6 +66,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> persistException(WebRequest request, EntityNotFoundException ex) {
         log.error("EntityNotFoundException: {}", ex.getMessage());
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<?> conflictException(WebRequest request, DataIntegrityViolationException ex) {
+        log.error("DataIntegrityViolationException: {}", ex.getMessage());
+        String rootMsg = ValidationUtil.getRootCause(ex).getMessage();
+        if (rootMsg != null) {
+            String lowerCaseMsg = rootMsg.toLowerCase();
+            for (Map.Entry<String, String> entry : CONSTRAINTS_MAP.entrySet()) {
+                if (lowerCaseMsg.contains(entry.getKey())) {
+                    return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), entry.getValue()),
+                            HttpStatus.UNPROCESSABLE_ENTITY);
+                }
+            }
+        }
+        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null),
+                HttpStatus.CONFLICT);
     }
 
     private ResponseEntity<Object> handleBindingErrors(BindingResult result, WebRequest request) {

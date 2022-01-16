@@ -8,17 +8,15 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import ru.javaops.topjava2.HasId;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "restaurants")
+@Table(name = "restaurants",
+        uniqueConstraints =@UniqueConstraint(columnNames = {"name"}, name = "uk_restaurant_name"))
 @ToString(callSuper = true)
 public class Restaurant extends NamedEntity implements HasId {
 
@@ -26,7 +24,7 @@ public class Restaurant extends NamedEntity implements HasId {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Dish> menu;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Vote> votes;
 
