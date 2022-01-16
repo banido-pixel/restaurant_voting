@@ -9,8 +9,7 @@ import ru.javaops.topjava2.web.SecurityUtil;
 
 import java.time.LocalDate;
 
-import static ru.javaops.topjava2.util.validation.ValidationUtil.assureIdConsistent;
-import static ru.javaops.topjava2.util.validation.ValidationUtil.checkNotFoundWithId;
+import static ru.javaops.topjava2.util.validation.ValidationUtil.*;
 
 @Slf4j
 public class AbstractVoteController {
@@ -29,6 +28,7 @@ public class AbstractVoteController {
         log.info("update vote {} for user {} for restaurant {}", vote, userId, restaurantId);
         assureIdConsistent(vote, id);
         Assert.notNull(vote, "vote must not be null");
+        assureTimeValid(Vote.class.getSimpleName(), "update");
         checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
     }
 
@@ -36,6 +36,7 @@ public class AbstractVoteController {
         int userId = SecurityUtil.authId();
         log.info("create vote for user {} for restaurant {}", userId, restaurantId);
         Vote vote = new Vote();
+        assureTimeValid(Vote.class.getSimpleName(), "create");
         return voteService.save(vote, userId, restaurantId);
     }
 }

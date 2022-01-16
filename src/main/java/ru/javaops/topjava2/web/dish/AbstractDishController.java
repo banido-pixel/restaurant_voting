@@ -41,6 +41,7 @@ public class AbstractDishController {
         log.info("update dish {} for restaurant with id = {}", dish, restaurantId);
         assureIdConsistent(dish, id);
         Assert.notNull(dish, "dish must not be null");
+        assureTimeValid(Dish.class.getSimpleName(), "update");
         checkNotFoundWithId(dishService.save(dish, restaurantId), id);
     }
 
@@ -48,6 +49,7 @@ public class AbstractDishController {
         log.info("create dish {} for restaurant with id = {}", dish, restaurantId);
         checkNew(dish);
         Assert.notNull(dish, "dish must not be null");
+        assureTimeValid(Dish.class.getSimpleName(), "create");
         return dishService.save(dish, restaurantId);
     }
 }

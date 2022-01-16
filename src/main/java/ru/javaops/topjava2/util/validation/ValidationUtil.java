@@ -5,7 +5,10 @@ import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 import ru.javaops.topjava2.HasId;
 import ru.javaops.topjava2.error.IllegalRequestDataException;
+import ru.javaops.topjava2.error.IllegalTimeException;
 import ru.javaops.topjava2.error.NotFoundException;
+
+import java.time.LocalTime;
 
 @UtilityClass
 public class ValidationUtil {
@@ -22,6 +25,13 @@ public class ValidationUtil {
             bean.setId(id);
         } else if (bean.id() != id) {
             throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must has id=" + id);
+        }
+    }
+
+    public static void assureTimeValid(String entity, String operationType){
+        LocalTime time = LocalTime.now();
+        if(time.isAfter(LocalTime.of(11,0))){
+            throw new IllegalTimeException( entity + " cannot be " + operationType + "d after 11:00");
         }
     }
 
