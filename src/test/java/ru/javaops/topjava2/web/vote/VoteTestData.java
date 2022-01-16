@@ -12,8 +12,9 @@ public class VoteTestData {
             MatcherFactory.usingEqualsComparator(Vote.class);
 
     public static final int VOTE_ID = 1;
-    public static final String LEGAL_TIME = LocalDateTime.of(LocalDate.now(), LocalTime.of(10,05,01)) + "Z";
-    public static final String ILLEGAL_TIME = LocalDateTime.of(LocalDate.now(), LocalTime.of(12,05,01)) + "Z";
+    public static final int ADMIN_ID = 2;
+    public static final String LEGAL_TIME = LocalDateTime.of(LocalDate.now(), LocalTime.of(10,5,1)) + "Z";
+    public static final String ILLEGAL_TIME = LocalDateTime.of(LocalDate.now(), LocalTime.of(12,5,1)) + "Z";
 
     public static final Vote userVote1 = new Vote(VOTE_ID, LocalDate.now());
     public static final Vote adminVote1 = new Vote(VOTE_ID + 1, LocalDate.now());

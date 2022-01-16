@@ -51,6 +51,14 @@ class ProfileVoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
+    void deleteForeign() throws Exception {
+        perform(MockMvcRequestBuilders.delete(REST_URL + ADMIN_ID))
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
     void update() throws Exception {
         Vote updated = getUpdated();
         updated.setId(null);
