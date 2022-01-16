@@ -2,6 +2,7 @@ package ru.javaops.topjava2.web.dish;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
@@ -10,6 +11,7 @@ import ru.javaops.topjava2.model.Dish;
 import ru.javaops.topjava2.repository.DishRepository;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
+import ru.javaops.topjava2.web.FixedLegalClockConfig;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -20,6 +22,7 @@ import static ru.javaops.topjava2.web.dish.DishTestData.*;
 import static ru.javaops.topjava2.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static ru.javaops.topjava2.web.user.UserTestData.ADMIN_MAIL;
 
+@SpringBootTest(classes = FixedLegalClockConfig.class)
 class AdminDishControllerTest extends AbstractControllerTest {
 
     static final String TEST_URL = REST_URL.replace("{restaurantId}", RESTAURANT_ID + "");

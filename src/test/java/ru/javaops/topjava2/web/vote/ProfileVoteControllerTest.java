@@ -14,6 +14,7 @@ import ru.javaops.topjava2.model.Vote;
 import ru.javaops.topjava2.repository.VoteRepository;
 import ru.javaops.topjava2.util.JsonUtil;
 import ru.javaops.topjava2.web.AbstractControllerTest;
+import ru.javaops.topjava2.web.FixedLegalClockConfig;
 
 import java.time.Clock;
 import java.time.Instant;
@@ -28,18 +29,7 @@ import static ru.javaops.topjava2.web.user.UserTestData.USER_MAIL;
 import static ru.javaops.topjava2.web.vote.ProfileVoteController.REST_URL;
 import static ru.javaops.topjava2.web.vote.VoteTestData.*;
 
-@TestConfiguration
- class FixedClockConfig {
-    @Primary
-    @Bean
-    Clock fixedClock() {
-        return Clock.fixed(
-                Instant.parse(LEGAL_TIME),
-                ZoneId.of("UTC"));
-    }
-}
-
-@SpringBootTest(classes = FixedClockConfig.class)
+@SpringBootTest(classes = FixedLegalClockConfig.class)
 class ProfileVoteControllerTest extends AbstractControllerTest {
 
 

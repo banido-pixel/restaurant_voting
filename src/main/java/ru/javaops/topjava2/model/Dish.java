@@ -1,5 +1,6 @@
 package ru.javaops.topjava2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +29,8 @@ public class Dish extends NamedEntity{
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @NotNull
     private Restaurant restaurant;
 
     @Column(name = "menu_date",nullable = false, columnDefinition = "date default now()", updatable = false)
