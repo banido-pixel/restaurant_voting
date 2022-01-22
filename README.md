@@ -1,5 +1,7 @@
-Задание выпускного проекта "Голосование за рестораны"
+Design and implement a REST API using Hibernate/Spring/SpringMVC (or Spring-Boot) without frontend.
 ================================
+
+The task is:
 
 Build a voting system for deciding where to have lunch.
 
