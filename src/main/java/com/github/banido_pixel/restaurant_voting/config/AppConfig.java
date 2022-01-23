@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import java.sql.SQLException;
+import java.time.Clock;
 
 @Configuration
 @Slf4j
@@ -30,6 +31,11 @@ public class AppConfig {
     @Bean
     Module module() {
         return new Hibernate5Module();
+    }
+
+    @Bean
+    Clock clock() {
+        return Clock.systemUTC();
     }
 
     @Autowired
