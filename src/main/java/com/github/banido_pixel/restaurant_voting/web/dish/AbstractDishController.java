@@ -1,17 +1,17 @@
 package com.github.banido_pixel.restaurant_voting.web.dish;
 
 import com.github.banido_pixel.restaurant_voting.model.Dish;
+import com.github.banido_pixel.restaurant_voting.service.DishService;
 import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import com.github.banido_pixel.restaurant_voting.service.DishService;
 
 import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.*;
+import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Slf4j
 public abstract class AbstractDishController {

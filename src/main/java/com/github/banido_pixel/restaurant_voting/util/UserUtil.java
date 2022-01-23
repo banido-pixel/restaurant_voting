@@ -1,11 +1,11 @@
 package com.github.banido_pixel.restaurant_voting.util;
 
+import com.github.banido_pixel.restaurant_voting.model.Role;
 import com.github.banido_pixel.restaurant_voting.model.User;
+import com.github.banido_pixel.restaurant_voting.to.UserTo;
 import lombok.experimental.UtilityClass;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.github.banido_pixel.restaurant_voting.model.Role;
-import com.github.banido_pixel.restaurant_voting.to.UserTo;
 
 @UtilityClass
 public class UserUtil {

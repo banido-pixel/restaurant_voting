@@ -1,11 +1,11 @@
 package com.github.banido_pixel.restaurant_voting.to;
 
+import com.github.banido_pixel.restaurant_voting.HasId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.github.banido_pixel.restaurant_voting.HasId;
 
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PROTECTED)

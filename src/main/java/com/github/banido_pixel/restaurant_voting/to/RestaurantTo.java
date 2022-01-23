@@ -18,6 +18,6 @@ public class RestaurantTo extends NamedTo implements HasId {
     }
 
     public RestaurantTo(Integer id, String name, Long votesAmount) {
-        this(id,name,votesAmount.intValue());
+        this(id, name, votesAmount.intValue());
     }
 }

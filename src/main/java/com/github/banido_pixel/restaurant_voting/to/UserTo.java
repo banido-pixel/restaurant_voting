@@ -1,10 +1,10 @@
 package com.github.banido_pixel.restaurant_voting.to;
 
+import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
 import com.github.banido_pixel.restaurant_voting.util.validation.NoHtml;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.Value;
-import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

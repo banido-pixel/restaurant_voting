@@ -1,6 +1,7 @@
 package com.github.banido_pixel.restaurant_voting.web.restaurant;
 
 import com.github.banido_pixel.restaurant_voting.model.Restaurant;
+import com.github.banido_pixel.restaurant_voting.to.RestaurantTo;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.github.banido_pixel.restaurant_voting.to.RestaurantTo;
 
 import javax.validation.Valid;
 import java.net.URI;

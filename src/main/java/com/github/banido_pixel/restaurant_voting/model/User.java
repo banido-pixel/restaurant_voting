@@ -1,12 +1,12 @@
 package com.github.banido_pixel.restaurant_voting.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
 import com.github.banido_pixel.restaurant_voting.util.validation.NoHtml;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.CollectionUtils;
-import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,7 +15,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")

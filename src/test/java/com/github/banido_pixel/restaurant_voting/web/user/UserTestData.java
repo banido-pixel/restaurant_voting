@@ -1,8 +1,8 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
+import com.github.banido_pixel.restaurant_voting.model.Role;
 import com.github.banido_pixel.restaurant_voting.model.User;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
-import com.github.banido_pixel.restaurant_voting.model.Role;
 import com.github.banido_pixel.restaurant_voting.web.MatcherFactory;
 
 import java.util.Collections;

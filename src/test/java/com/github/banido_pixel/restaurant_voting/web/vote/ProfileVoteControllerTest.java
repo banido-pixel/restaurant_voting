@@ -1,6 +1,10 @@
 package com.github.banido_pixel.restaurant_voting.web.vote;
 
+import com.github.banido_pixel.restaurant_voting.model.Vote;
+import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
+import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
+import com.github.banido_pixel.restaurant_voting.web.FixedLegalClockConfig;
 import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +13,15 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import com.github.banido_pixel.restaurant_voting.model.Vote;
-import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
-import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
-import com.github.banido_pixel.restaurant_voting.web.FixedLegalClockConfig;
 
+import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
+import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
+import static com.github.banido_pixel.restaurant_voting.web.vote.ProfileVoteController.REST_URL;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
-import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
-import static com.github.banido_pixel.restaurant_voting.web.vote.ProfileVoteController.REST_URL;
 
 @SpringBootTest(classes = FixedLegalClockConfig.class)
 class ProfileVoteControllerTest extends AbstractControllerTest {

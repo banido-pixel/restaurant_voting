@@ -1,10 +1,10 @@
 package com.github.banido_pixel.restaurant_voting.service;
 
-import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository;
-import org.springframework.stereotype.Service;
 import com.github.banido_pixel.restaurant_voting.model.Vote;
+import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository;
 import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -33,7 +33,7 @@ public class DishService {
         return dishRepository.getAllWithDate(restaurantId, date);
     }
 
-    public void delete(int id, int restaurantId){
+    public void delete(int id, int restaurantId) {
         dishRepository.deleteExisted(id, restaurantId);
     }
 

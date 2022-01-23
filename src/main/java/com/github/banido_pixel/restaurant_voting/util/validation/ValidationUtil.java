@@ -1,12 +1,12 @@
 package com.github.banido_pixel.restaurant_voting.util.validation;
 
+import com.github.banido_pixel.restaurant_voting.HasId;
 import com.github.banido_pixel.restaurant_voting.error.IllegalRequestDataException;
+import com.github.banido_pixel.restaurant_voting.error.IllegalTimeException;
+import com.github.banido_pixel.restaurant_voting.error.NotFoundException;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
-import com.github.banido_pixel.restaurant_voting.HasId;
-import com.github.banido_pixel.restaurant_voting.error.IllegalTimeException;
-import com.github.banido_pixel.restaurant_voting.error.NotFoundException;
 
 import java.time.Clock;
 import java.time.LocalTime;
@@ -29,10 +29,10 @@ public class ValidationUtil {
         }
     }
 
-    public static void assureTimeValid(String entity, String operationType, Clock clock){
+    public static void assureTimeValid(String entity, String operationType, Clock clock) {
         LocalTime time = LocalTime.now(clock);
-        if(time.isAfter(LocalTime.of(11,0))){
-            throw new IllegalTimeException( entity + " cannot be " + operationType + "d after 11:00");
+        if (time.isAfter(LocalTime.of(11, 0))) {
+            throw new IllegalTimeException(entity + " cannot be " + operationType + "d after 11:00");
         }
     }
 

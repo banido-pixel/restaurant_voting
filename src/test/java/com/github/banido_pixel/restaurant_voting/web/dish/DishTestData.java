@@ -10,14 +10,14 @@ public class DishTestData {
             MatcherFactory.usingEqualsComparator(Dish.class);
 
     public static final int DISH_ID = 1;
-    public static final String MENU_DATE = LocalDate.of(2022,1,11).toString();
+    public static final String MENU_DATE = LocalDate.of(2022, 1, 11).toString();
 
-    public static final Dish dish1 = new Dish(DISH_ID, "Уха",250);
-    public static final Dish dish2 = new Dish(DISH_ID+1, "Весенний салат",100);
-    public static final Dish dish3 = new Dish(DISH_ID+2, "Плов",200);
-    public static final Dish dish4 = new Dish(DISH_ID+3, "Борщ",250);
-    public static final Dish dish5 = new Dish(DISH_ID+4, "Цезарь",100);
-    public static final Dish dish6 = new Dish(DISH_ID+5, "Куриное рагу",150);
+    public static final Dish dish1 = new Dish(DISH_ID, "Уха", 250);
+    public static final Dish dish2 = new Dish(DISH_ID + 1, "Весенний салат", 100);
+    public static final Dish dish3 = new Dish(DISH_ID + 2, "Плов", 200);
+    public static final Dish dish4 = new Dish(DISH_ID + 3, "Борщ", 250);
+    public static final Dish dish5 = new Dish(DISH_ID + 4, "Цезарь", 100);
+    public static final Dish dish6 = new Dish(DISH_ID + 5, "Куриное рагу", 150);
 
     public static Dish getUpdated() {
         return new Dish(DISH_ID, "UpdatedName", 133);

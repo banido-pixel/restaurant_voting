@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Table(name = "dishes",
         uniqueConstraints = @UniqueConstraint(columnNames = {"name", "restaurant_id", "menu_date"},
                 name = "uk_restaurant_menu_datetime"))
-public class Dish extends NamedEntity{
+public class Dish extends NamedEntity {
 
     @Column(name = "price", nullable = false)
     @Range(min = 1, max = 1000000)
@@ -33,14 +33,14 @@ public class Dish extends NamedEntity{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
-    @Column(name = "menu_date",nullable = false, columnDefinition = "date default now()", updatable = false)
+    @Column(name = "menu_date", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate menuDate = LocalDate.now();
 
-    public Dish(Integer id, String name, Integer price){
-        super(id,name);
-        this.price=price;
+    public Dish(Integer id, String name, Integer price) {
+        super(id, name);
+        this.price = price;
     }
 }

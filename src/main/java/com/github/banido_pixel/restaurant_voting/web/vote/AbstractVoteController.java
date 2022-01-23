@@ -1,11 +1,11 @@
 package com.github.banido_pixel.restaurant_voting.web.vote;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.service.VoteService;
 import com.github.banido_pixel.restaurant_voting.web.SecurityUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 
 import java.time.Clock;
 import java.util.List;

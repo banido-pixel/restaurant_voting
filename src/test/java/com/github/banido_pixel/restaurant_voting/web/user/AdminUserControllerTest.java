@@ -1,6 +1,9 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
+import com.github.banido_pixel.restaurant_voting.model.Role;
 import com.github.banido_pixel.restaurant_voting.model.User;
+import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
+import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import com.github.banido_pixel.restaurant_voting.model.Role;
-import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
-import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;

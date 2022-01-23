@@ -1,14 +1,14 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
+import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
+import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
+import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
+import com.github.banido_pixel.restaurant_voting.web.SecurityUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import com.github.banido_pixel.restaurant_voting.HasIdAndEmail;
-import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
-import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
-import com.github.banido_pixel.restaurant_voting.web.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,7 +39,8 @@ public class UniqueMailValidator implements org.springframework.validation.Valid
                             // Workaround for update with user.id=null in request body
                             // ValidationUtil.assureIdConsistent called after this validation
                             String requestURI = request.getRequestURI();
-                            if (requestURI.endsWith("/" + dbId) || (dbId == SecurityUtil.authId() && requestURI.contains("/profile"))) return;
+                            if (requestURI.endsWith("/" + dbId) || (dbId == SecurityUtil.authId() && requestURI.contains("/profile")))
+                                return;
                         }
                         errors.rejectValue("email", "", GlobalExceptionHandler.EXCEPTION_DUPLICATE_EMAIL);
                     });

@@ -1,6 +1,7 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
 import com.github.banido_pixel.restaurant_voting.model.User;
+import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.to.UserTo;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
 import com.github.banido_pixel.restaurant_voting.util.UserUtil;
@@ -12,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

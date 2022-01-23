@@ -1,8 +1,10 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
 import com.github.banido_pixel.restaurant_voting.model.User;
+import com.github.banido_pixel.restaurant_voting.to.UserTo;
 import com.github.banido_pixel.restaurant_voting.util.UserUtil;
 import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
+import com.github.banido_pixel.restaurant_voting.web.AuthUser;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
@@ -14,8 +16,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import com.github.banido_pixel.restaurant_voting.to.UserTo;
-import com.github.banido_pixel.restaurant_voting.web.AuthUser;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -23,7 +23,6 @@ import java.net.URI;
 @RestController
 @RequestMapping(value = ProfileController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
-// TODO: cache only most requested data!
 @CacheConfig(cacheNames = "users")
 public class ProfileController extends AbstractUserController {
     static final String REST_URL = "/api/profile";

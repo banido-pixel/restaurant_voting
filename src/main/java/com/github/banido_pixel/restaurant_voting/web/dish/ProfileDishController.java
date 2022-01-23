@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = ProfileDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ProfileDishController extends AbstractDishController{
+public class ProfileDishController extends AbstractDishController {
 
     static final String REST_URL = "/api/restaurants/{restaurantId}/dishes/";
 

@@ -3,24 +3,23 @@ package com.github.banido_pixel.restaurant_voting.web.dish;
 import com.github.banido_pixel.restaurant_voting.model.Dish;
 import com.github.banido_pixel.restaurant_voting.repository.DishRepository;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
+import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
+import com.github.banido_pixel.restaurant_voting.web.FixedIllegalClockConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
-import com.github.banido_pixel.restaurant_voting.web.FixedIllegalClockConfig;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static com.github.banido_pixel.restaurant_voting.web.dish.AdminDishController.REST_URL;
 import static com.github.banido_pixel.restaurant_voting.web.dish.DishTestData.*;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.ADMIN_MAIL;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = FixedIllegalClockConfig.class)
 class AdminDishControllerIllegalTest extends AbstractControllerTest {

@@ -1,19 +1,19 @@
 package com.github.banido_pixel.restaurant_voting.web.restaurant;
 
 import com.github.banido_pixel.restaurant_voting.model.Restaurant;
+import com.github.banido_pixel.restaurant_voting.to.RestaurantTo;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.github.banido_pixel.restaurant_voting.to.RestaurantTo;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = ProfileRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ProfileRestaurantController extends AbstractRestaurantController{
+public class ProfileRestaurantController extends AbstractRestaurantController {
 
     static final String REST_URL = "/api/restaurants/";
 

@@ -1,6 +1,7 @@
 package com.github.banido_pixel.restaurant_voting.web.user;
 
 import com.github.banido_pixel.restaurant_voting.model.User;
+import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 
 @Slf4j
 public abstract class AbstractUserController {
