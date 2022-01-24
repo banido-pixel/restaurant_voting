@@ -19,10 +19,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "dishes",
+@Table(name = "menu_item",
         uniqueConstraints = @UniqueConstraint(columnNames = {"name", "restaurant_id", "menu_date"},
                 name = "uk_restaurant_menu_datetime"))
-public class Dish extends NamedEntity {
+public class MenuItem extends NamedEntity {
 
     @Column(name = "price", nullable = false)
     @Range(min = 1, max = 1000000)
@@ -39,7 +39,7 @@ public class Dish extends NamedEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate menuDate = LocalDate.now();
 
-    public Dish(Integer id, String name, Integer price) {
+    public MenuItem(Integer id, String name, Integer price) {
         super(id, name);
         this.price = price;
     }

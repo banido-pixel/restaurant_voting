@@ -12,7 +12,7 @@ VALUES ('Арарат'),
        ('Белый аист'),
        ('Прага');
 
-INSERT INTO DISHES (NAME, PRICE, RESTAURANT_ID, MENU_DATE)
+INSERT INTO MENU_ITEM (NAME, PRICE, RESTAURANT_ID, MENU_DATE)
 VALUES ('Уха', 250, 1, current_date),
        ('Весенний салат', 100, 1, current_date),
        ('Плов', 200, 1, current_date),

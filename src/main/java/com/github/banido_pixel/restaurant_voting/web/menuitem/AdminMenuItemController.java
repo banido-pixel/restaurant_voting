@@ -1,6 +1,6 @@
-package com.github.banido_pixel.restaurant_voting.web.dish;
+package com.github.banido_pixel.restaurant_voting.web.menuitem;
 
-import com.github.banido_pixel.restaurant_voting.model.Dish;
+import com.github.banido_pixel.restaurant_voting.model.MenuItem;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -15,27 +15,27 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminDishController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AdminDishController extends AbstractDishController {
+@RequestMapping(value = AdminMenuItemController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdminMenuItemController extends AbstractMenuItemController {
 
-    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/dishes/";
+    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu-items/";
 
     @GetMapping
     @Operation(summary = "getAll")
-    public List<Dish> getAll(@PathVariable int restaurantId) {
+    public List<MenuItem> getAll(@PathVariable int restaurantId) {
         return super.getAll(restaurantId);
     }
 
     @GetMapping("previous")
     @Operation(summary = "getAllWithDate")
-    public List<Dish> getAllWithDate(@PathVariable int restaurantId,
-                                     @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public List<MenuItem> getAllWithDate(@PathVariable int restaurantId,
+                                         @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(restaurantId, date);
     }
 
     @GetMapping("{id}")
     @Operation(summary = "get")
-    public Dish get(@PathVariable int id, @PathVariable int restaurantId) {
+    public MenuItem get(@PathVariable int id, @PathVariable int restaurantId) {
         return super.get(id, restaurantId);
     }
 
@@ -49,14 +49,14 @@ public class AdminDishController extends AbstractDishController {
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "update")
-    public void update(@Valid @RequestBody Dish dish, @PathVariable int id, @PathVariable int restaurantId) {
-        super.update(dish, id, restaurantId);
+    public void update(@Valid @RequestBody MenuItem menuItem, @PathVariable int id, @PathVariable int restaurantId) {
+        super.update(menuItem, id, restaurantId);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "create")
-    public ResponseEntity<Dish> createWithLocation(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
-        Dish created = super.create(dish, restaurantId);
+    public ResponseEntity<MenuItem> createWithLocation(@Valid @RequestBody MenuItem menuItem, @PathVariable int restaurantId) {
+        MenuItem created = super.create(menuItem, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "{id}")

@@ -31,13 +31,13 @@ import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.M
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public static final String EXCEPTION_DUPLICATE_EMAIL = "User with this email already exists";
-    public static final String EXCEPTION_DUPLICATE_DISH_NAME = "Dish with this name and date already exists";
+    public static final String EXCEPTION_DUPLICATE_MENU_ITEM_NAME = "MenuItem with this name and date already exists";
     public static final String EXCEPTION_DUPLICATE_RESTAURANT_NAME = "Restaurant with this name already exists";
     public static final String EXCEPTION_SECOND_VOTE_PER_DATE = "Today vote has already been spent";
 
     private static final Map<String, String> CONSTRAINTS_MAP = Map.of(
             "uk_restaurant_name", EXCEPTION_DUPLICATE_RESTAURANT_NAME,
-            "uk_restaurant_menu_datetime", EXCEPTION_DUPLICATE_DISH_NAME,
+            "uk_restaurant_menu_datetime", EXCEPTION_DUPLICATE_MENU_ITEM_NAME,
             "uk_user_vote", EXCEPTION_SECOND_VOTE_PER_DATE
     );
 

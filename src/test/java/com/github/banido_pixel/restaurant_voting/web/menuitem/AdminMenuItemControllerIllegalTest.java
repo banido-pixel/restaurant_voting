@@ -1,7 +1,7 @@
-package com.github.banido_pixel.restaurant_voting.web.dish;
+package com.github.banido_pixel.restaurant_voting.web.menuitem;
 
-import com.github.banido_pixel.restaurant_voting.model.Dish;
-import com.github.banido_pixel.restaurant_voting.repository.DishRepository;
+import com.github.banido_pixel.restaurant_voting.model.MenuItem;
+import com.github.banido_pixel.restaurant_voting.repository.MenuItemRepository;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
 import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 import com.github.banido_pixel.restaurant_voting.web.FixedIllegalClockConfig;
@@ -12,8 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.github.banido_pixel.restaurant_voting.web.dish.AdminDishController.REST_URL;
-import static com.github.banido_pixel.restaurant_voting.web.dish.DishTestData.*;
+import static com.github.banido_pixel.restaurant_voting.web.menuitem.AdminMenuItemController.REST_URL;
+import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.*;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.ADMIN_MAIL;
 import static org.hamcrest.Matchers.containsString;
@@ -22,20 +22,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = FixedIllegalClockConfig.class)
-class AdminDishControllerIllegalTest extends AbstractControllerTest {
+class AdminMenuItemControllerIllegalTest extends AbstractControllerTest {
 
     static final String TEST_URL = REST_URL.replace("{restaurantId}", RESTAURANT_ID + "");
 
     @Autowired
-    private DishRepository dishRepository;
+    private MenuItemRepository menuItemRepository;
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void createAfterAllowedTime() throws Exception {
-        Dish newDish = getNew();
+        MenuItem newMenuItem = getNew();
         perform(MockMvcRequestBuilders.post(TEST_URL)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.writeValue(newDish)))
+                .content(JsonUtil.writeValue(newMenuItem)))
                 .andExpect(status().isUnprocessableEntity())
                 .andExpect(content().string(containsString("11:00")));
     }
@@ -43,9 +43,9 @@ class AdminDishControllerIllegalTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void updateAfterAllowedTime() throws Exception {
-        Dish updated = getUpdated();
+        MenuItem updated = getUpdated();
         updated.setId(null);
-        perform(MockMvcRequestBuilders.put(TEST_URL + DISH_ID)
+        perform(MockMvcRequestBuilders.put(TEST_URL + MENU_ITEM_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
