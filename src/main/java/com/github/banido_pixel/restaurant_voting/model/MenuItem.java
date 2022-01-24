@@ -25,7 +25,7 @@ import java.time.LocalDate;
 public class MenuItem extends NamedEntity {
 
     @Column(name = "price", nullable = false)
-    @Range(min = 1, max = 1000000)
+    @Range()
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
