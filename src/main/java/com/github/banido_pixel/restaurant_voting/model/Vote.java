@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "votes",
+@Table(name = "vote",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "vote_date"},
                 name = "uk_user_vote"))
 public class Vote extends BaseEntity {

@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "restaurants",
+@Table(name = "restaurant",
         uniqueConstraints = @UniqueConstraint(columnNames = {"name"}, name = "uk_restaurant_name"))
 @ToString(callSuper = true)
 public class Restaurant extends NamedEntity implements HasId {

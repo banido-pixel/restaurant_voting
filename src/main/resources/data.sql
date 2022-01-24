@@ -7,7 +7,7 @@ VALUES ('USER', 1),
        ('ADMIN', 2),
        ('USER', 2);
 
-INSERT INTO RESTAURANTS (NAME)
+INSERT INTO RESTAURANT (NAME)
 VALUES ('Арарат'),
        ('Белый аист'),
        ('Прага');
@@ -21,7 +21,7 @@ VALUES ('Уха', 250, 1, current_date),
        ('Куриное рагу', 150, 1, '2022-01-11');
 
 
-INSERT INTO VOTES (RESTAURANT_ID, USER_ID, VOTE_DATE)
+INSERT INTO VOTE (RESTAURANT_ID, USER_ID, VOTE_DATE)
 VALUES (1, 1, current_date),
        (3, 2, current_date),
        (1, 1, '2022-01-11'),
