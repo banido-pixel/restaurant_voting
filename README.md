@@ -19,3 +19,11 @@ Each restaurant provides a new menu each day.
 Swagger:
 * http://localhost:8080/swagger-ui.html
 * http://localhost:8080/v3/api-docs
+
+Credentials
+* User
+  * username: user@yandex.ru 
+  * password: password
+* Admin
+  * username: admin@gmail.com
+  * password: admin
