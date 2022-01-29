@@ -23,16 +23,16 @@ public class ProfileRestaurantController extends AbstractRestaurantController {
         return super.getAll();
     }
 
-    @GetMapping("rated")
+    @GetMapping("with-rating-today")
     @Operation(summary = "getAllWithVotes")
     public List<RestaurantTo> getAllWithVotes() {
         return super.getAllWithVotes();
     }
 
-    @GetMapping("previous")
-    @Operation(summary = "getAllWithDate")
+    @GetMapping("with-rating-by-date")
+    @Operation(summary = "getAllWithVotesWithDate")
     public List<RestaurantTo> getAllWithDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
-        return super.getAllWithDate(date);
+        return super.getAllWithVotesWithDate(date);
     }
 
     @GetMapping("{id}")

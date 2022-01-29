@@ -19,5 +19,5 @@ public interface RestaurantRepository extends BaseRepository<Restaurant> {
 
     @Query("SELECT new com.github.banido_pixel.restaurant_voting.to.RestaurantTo(r.id, r.name, (" +
             "SELECT COUNT(v.date) FROM Vote v WHERE v.date=:date AND v.restaurant.id=r.id)) FROM Restaurant r")
-    Optional<List<RestaurantTo>> getAllWithDate(@Param("date") LocalDate date);
+    Optional<List<RestaurantTo>> getAllWithVotesWithDate(@Param("date") LocalDate date);
 }

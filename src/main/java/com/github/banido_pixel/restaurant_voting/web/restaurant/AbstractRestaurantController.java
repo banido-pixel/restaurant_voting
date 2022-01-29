@@ -31,9 +31,9 @@ public abstract class AbstractRestaurantController {
         return restaurantRepository.getAllWithVotes().orElseThrow();
     }
 
-    public List<RestaurantTo> getAllWithDate(LocalDate date) {
-        log.info("getAll restaurants with date {}", date);
-        return restaurantRepository.getAllWithDate(date).orElseThrow();
+    public List<RestaurantTo> getAllWithVotesWithDate(LocalDate date) {
+        log.info("getAll restaurants with votes with date {}", date);
+        return restaurantRepository.getAllWithVotesWithDate(date).orElseThrow();
     }
 
     public ResponseEntity<Restaurant> get(int id) {
