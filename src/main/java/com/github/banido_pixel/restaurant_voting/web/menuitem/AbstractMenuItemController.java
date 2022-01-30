@@ -32,6 +32,11 @@ public abstract class AbstractMenuItemController {
         return menuItemService.getAllWithDate(restaurantId, date).orElseThrow();
     }
 
+    public List<MenuItem> getAll(int restaurantId) {
+        log.info("getAll menu items for restaurant with id = {}", restaurantId);
+        return menuItemService.getAll(restaurantId).orElseThrow();
+    }
+
     public MenuItem get(int id, int restaurantId) {
         log.info("get menu item {} for restaurant with id = {}", id, restaurantId);
         return menuItemService.get(id, restaurantId).orElseThrow();

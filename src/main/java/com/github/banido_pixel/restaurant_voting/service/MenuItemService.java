@@ -33,6 +33,10 @@ public class MenuItemService {
         return menuItemRepository.getAllWithDate(restaurantId, date);
     }
 
+    public Optional<List<MenuItem>> getAll(int restaurantId) {
+        return menuItemRepository.getAll(restaurantId);
+    }
+
     public void delete(int id, int restaurantId) {
         menuItemRepository.deleteExisted(id, restaurantId);
     }

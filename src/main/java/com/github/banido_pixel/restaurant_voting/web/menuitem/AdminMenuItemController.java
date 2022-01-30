@@ -33,6 +33,12 @@ public class AdminMenuItemController extends AbstractMenuItemController {
         return super.getAllWithDate(restaurantId, date);
     }
 
+    @GetMapping
+    @Operation(summary = "getAll")
+    public List<MenuItem> getAll(@PathVariable int restaurantId) {
+        return super.getAll(restaurantId);
+    }
+
     @GetMapping("{id}")
     @Operation(summary = "get")
     public MenuItem get(@PathVariable int id, @PathVariable int restaurantId) {
