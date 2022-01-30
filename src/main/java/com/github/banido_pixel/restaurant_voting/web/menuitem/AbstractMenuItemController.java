@@ -23,37 +23,37 @@ public abstract class AbstractMenuItemController {
     private Clock clock;
 
     public List<MenuItem> getAllToday(int restaurantId) {
-        log.info("getAll dishes for restaurant with id = {}", restaurantId);
+        log.info("getAll today menu items for restaurant with id = {}", restaurantId);
         return menuItemService.getAllToday(restaurantId).orElseThrow();
     }
 
     public List<MenuItem> getAllWithDate(int restaurantId, LocalDate date) {
-        log.info("getAll dishes with date {} for restaurant with id = {}", date, restaurantId);
+        log.info("getAll menu items with date {} for restaurant with id = {}", date, restaurantId);
         return menuItemService.getAllWithDate(restaurantId, date).orElseThrow();
     }
 
     public MenuItem get(int id, int restaurantId) {
-        log.info("get dish {} for restaurant with id = {}", id, restaurantId);
+        log.info("get menu item {} for restaurant with id = {}", id, restaurantId);
         return menuItemService.get(id, restaurantId).orElseThrow();
     }
 
     public void delete(int id, int restaurantId) {
-        log.info("delete dish {} for restaurant with id = {}", id, restaurantId);
+        log.info("delete menu item {} for restaurant with id = {}", id, restaurantId);
         menuItemService.delete(id, restaurantId);
     }
 
     public void update(MenuItem menuItem, int id, int restaurantId) {
-        log.info("update dish {} for restaurant with id = {}", menuItem, restaurantId);
+        log.info("update menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.assureIdConsistent(menuItem, id);
-        Assert.notNull(menuItem, "dish must not be null");
+        Assert.notNull(menuItem, "menu item must not be null");
         ValidationUtil.assureTimeValid(MenuItem.class.getSimpleName(), "update", clock);
         checkNotFoundWithId(menuItemService.save(menuItem, restaurantId), id);
     }
 
     public MenuItem create(MenuItem menuItem, int restaurantId) {
-        log.info("create dish {} for restaurant with id = {}", menuItem, restaurantId);
+        log.info("create menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.checkNew(menuItem);
-        Assert.notNull(menuItem, "dish must not be null");
+        Assert.notNull(menuItem, "menu item must not be null");
         ValidationUtil.assureTimeValid(MenuItem.class.getSimpleName(), "create", clock);
         return menuItemService.save(menuItem, restaurantId);
     }
