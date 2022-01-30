@@ -21,12 +21,12 @@ public class AdminMenuItemController extends AbstractMenuItemController {
     static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu-items/";
 
     @GetMapping("today")
-    @Operation(summary = "getAll")
+    @Operation(summary = "getAllToday")
     public List<MenuItem> getAllToday(@PathVariable int restaurantId) {
         return super.getAllToday(restaurantId);
     }
 
-    @GetMapping("previous")
+    @GetMapping("by-date")
     @Operation(summary = "getAllWithDate")
     public List<MenuItem> getAllWithDate(@PathVariable int restaurantId,
                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {

@@ -16,7 +16,7 @@ public class ProfileMenuItemController extends AbstractMenuItemController {
     static final String REST_URL = "/api/restaurants/{restaurantId}/menu-items/";
 
     @GetMapping("today")
-    @Operation(summary = "getAll today menu items")
+    @Operation(summary = "getAllToday")
     public List<MenuItem> getAllToday(@PathVariable int restaurantId) {
         return super.getAllToday(restaurantId);
     }
