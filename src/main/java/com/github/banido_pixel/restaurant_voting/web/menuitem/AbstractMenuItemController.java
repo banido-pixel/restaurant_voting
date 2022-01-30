@@ -22,9 +22,9 @@ public abstract class AbstractMenuItemController {
     @Autowired
     private Clock clock;
 
-    public List<MenuItem> getAll(int restaurantId) {
+    public List<MenuItem> getAllToday(int restaurantId) {
         log.info("getAll dishes for restaurant with id = {}", restaurantId);
-        return menuItemService.getAll(restaurantId).orElseThrow();
+        return menuItemService.getAllToday(restaurantId).orElseThrow();
     }
 
     public List<MenuItem> getAllWithDate(int restaurantId, LocalDate date) {

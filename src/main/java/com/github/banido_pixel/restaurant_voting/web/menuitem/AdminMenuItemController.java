@@ -20,10 +20,10 @@ public class AdminMenuItemController extends AbstractMenuItemController {
 
     static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu-items/";
 
-    @GetMapping
+    @GetMapping("menu-today")
     @Operation(summary = "getAll")
-    public List<MenuItem> getAll(@PathVariable int restaurantId) {
-        return super.getAll(restaurantId);
+    public List<MenuItem> getAllToday(@PathVariable int restaurantId) {
+        return super.getAllToday(restaurantId);
     }
 
     @GetMapping("previous")

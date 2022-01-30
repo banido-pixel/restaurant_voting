@@ -25,8 +25,8 @@ public class MenuItemService {
         return menuItemRepository.get(id, restaurantId);
     }
 
-    public Optional<List<MenuItem>> getAll(int restaurantId) {
-        return menuItemRepository.getAll(restaurantId);
+    public Optional<List<MenuItem>> getAllToday(int restaurantId) {
+        return menuItemRepository.getAllToday(restaurantId);
     }
 
     public Optional<List<MenuItem>> getAllWithDate(int restaurantId, LocalDate date) {
