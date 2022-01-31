@@ -20,22 +20,11 @@ class ProfileMenuItemControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
-    void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(TEST_URL))
+    void getAllToday() throws Exception {
+        perform(MockMvcRequestBuilders.get(TEST_URL + "/today"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(MENU_ITEM_MATCHER.contentJson(menuItem1, menuItem2, menuItem3));
-    }
-
-    @Test
-    @WithUserDetails(value = USER_MAIL)
-    void getAllWithDate() throws Exception {
-        perform(MockMvcRequestBuilders.get(TEST_URL + "/previous")
-                .param("date", MENU_DATE))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MENU_ITEM_MATCHER.contentJson(menuItem4, menuItem5, menuItem6));
     }
 }

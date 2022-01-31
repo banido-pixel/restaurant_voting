@@ -44,6 +44,17 @@ class AdminMenuItemControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
+    void getAllWithDate() throws Exception {
+        perform(MockMvcRequestBuilders.get(TEST_URL + "/by-date")
+                .param("date", MENU_DATE))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(MENU_ITEM_MATCHER.contentJson(menuItem4, menuItem5, menuItem6));
+    }
+
+    @Test
+    @WithUserDetails(value = ADMIN_MAIL)
     void delete() throws Exception {
         perform(MockMvcRequestBuilders.delete(TEST_URL + MENU_ITEM_ID))
                 .andDo(print())
