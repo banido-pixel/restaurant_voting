@@ -1,7 +1,6 @@
 package com.github.banido_pixel.restaurant_voting.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,12 +36,12 @@ public class MenuItem extends NamedEntity {
 
     @Column(name = "menu_date", nullable = false, columnDefinition = "date default now()", updatable = false)
     @NotNull
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate menuDate = LocalDate.now();
 
-    public MenuItem(Integer id, String name, Integer price) {
+    public MenuItem(Integer id, String name, Integer price, LocalDate menuDate) {
         super(id, name);
         this.price = price;
+        this.menuDate = menuDate;
     }
 }
