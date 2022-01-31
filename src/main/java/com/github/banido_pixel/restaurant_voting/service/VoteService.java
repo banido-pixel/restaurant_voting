@@ -31,6 +31,10 @@ public class VoteService {
         return voteRepository.get(id, userId);
     }
 
+    public Optional<Vote> getByDate(LocalDate date, int userId) {
+        return voteRepository.getByDate(date, userId);
+    }
+
     public void delete(int id, int userId) {
         voteRepository.deleteExisted(id, userId);
     }

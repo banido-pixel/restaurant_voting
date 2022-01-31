@@ -6,6 +6,7 @@ import com.github.banido_pixel.restaurant_voting.web.SecurityUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.*;
@@ -48,6 +50,14 @@ public class VoteController {
         int userId = SecurityUtil.authId();
         log.info("get vote history for user {}", userId);
         return voteService.get(id, userId).orElseThrow();
+    }
+
+    @GetMapping("by-date")
+    @Operation(summary = "getByDate")
+    public Vote getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        int userId = SecurityUtil.authId();
+        log.info("get vote history for user {}", userId);
+        return voteService.getByDate(date, userId).orElseThrow();
     }
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -16,9 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
+import static com.github.banido_pixel.restaurant_voting.web.vote.VoteTestData.VOTE_DATE;
 import static com.github.banido_pixel.restaurant_voting.web.vote.VoteController.REST_URL;
 import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -37,6 +37,17 @@ class VoteControllerTest extends AbstractControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(VoteTestData.VOTE_MATCHER.contentJson(VoteTestData.userVote1, VoteTestData.userVote2, VoteTestData.userVote3));
+    }
+
+    @Test
+    @WithUserDetails(value = USER_MAIL)
+    void getByDate() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "by-date")
+                .param("date", VOTE_DATE))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+                .andExpect(VoteTestData.VOTE_MATCHER.contentJson(VoteTestData.userVote2));
     }
 
     @Test
