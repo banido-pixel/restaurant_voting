@@ -50,15 +50,6 @@ public class VoteController {
         return voteService.get(id, userId).orElseThrow();
     }
 
-    @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(summary = "delete")
-    public void delete(@PathVariable int id) {
-        int userId = SecurityUtil.authId();
-        log.info("delete vote {} for user {}", id, userId);
-        voteService.delete(id, userId);
-    }
-
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)

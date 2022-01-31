@@ -41,23 +41,6 @@ class VoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
-    void delete() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + VoteTestData.VOTE_ID))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-        assertFalse(voteRepository.findById(VoteTestData.VOTE_ID).isPresent());
-    }
-
-    @Test
-    @WithUserDetails(value = USER_MAIL)
-    void deleteForeign() throws Exception {
-        perform(MockMvcRequestBuilders.delete(REST_URL + VoteTestData.ADMIN_ID))
-                .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
-    }
-
-    @Test
-    @WithUserDetails(value = USER_MAIL)
     void update() throws Exception {
         Vote updated = VoteTestData.getUpdated();
         updated.setId(null);
