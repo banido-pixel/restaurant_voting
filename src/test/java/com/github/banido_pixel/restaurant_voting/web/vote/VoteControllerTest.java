@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
-import static com.github.banido_pixel.restaurant_voting.web.vote.ProfileVoteController.REST_URL;
+import static com.github.banido_pixel.restaurant_voting.web.vote.VoteController.REST_URL;
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = FixedLegalClockConfig.class)
-class ProfileVoteControllerTest extends AbstractControllerTest {
+class VoteControllerTest extends AbstractControllerTest {
 
     @Autowired
     private VoteRepository voteRepository;
