@@ -24,11 +24,11 @@ public interface VoteRepository extends BaseRepository<Vote> {
     }
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id=:id AND v.user.id=:userId")
-    Optional<Vote> get(@Param("id") int id, @Param("userId") int user_id);
+    Optional<Vote> get(@Param("id") int id, @Param("userId") int userId);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.date=:date AND v.user.id=:userId")
-    Optional<Vote> getByDate(@Param("date") LocalDate date, @Param("userId") int user_id);
+    Optional<Vote> getByDate(@Param("date") LocalDate date, @Param("userId") int userId);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.user.id=:userId ORDER BY v.date DESC")
-    List<Vote> getAll(@Param("userId") int user_id);
+    List<Vote> getAll(@Param("userId") int userId);
 }
