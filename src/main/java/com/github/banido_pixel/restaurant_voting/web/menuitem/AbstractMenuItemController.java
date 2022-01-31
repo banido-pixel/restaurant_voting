@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
-import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,9 +17,6 @@ public abstract class AbstractMenuItemController {
 
     @Autowired
     private MenuItemService menuItemService;
-
-    @Autowired
-    private Clock clock;
 
     public List<MenuItem> getAllToday(int restaurantId) {
         log.info("getAll today menu items for restaurant with id = {}", restaurantId);
@@ -51,7 +47,6 @@ public abstract class AbstractMenuItemController {
         log.info("update menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.assureIdConsistent(menuItem, id);
         Assert.notNull(menuItem, "menu item must not be null");
-        ValidationUtil.assureTimeValid(MenuItem.class.getSimpleName(), "update", clock);
         checkNotFoundWithId(menuItemService.save(menuItem, restaurantId), id);
     }
 
@@ -59,7 +54,6 @@ public abstract class AbstractMenuItemController {
         log.info("create menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.checkNew(menuItem);
         Assert.notNull(menuItem, "menu item must not be null");
-        ValidationUtil.assureTimeValid(MenuItem.class.getSimpleName(), "create", clock);
         return menuItemService.save(menuItem, restaurantId);
     }
 }
