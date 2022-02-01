@@ -23,9 +23,6 @@ public interface MenuItemRepository extends BaseRepository<MenuItem> {
         ValidationUtil.checkModification(delete(id, restaurantId), id);
     }
 
-    @Query("SELECT i FROM MenuItem i WHERE i.restaurant.id=:restaurantId AND i.menuDate=current_date")
-    List<MenuItem> getAllToday(@Param("restaurantId") int restaurantId);
-
     @Query("SELECT i FROM MenuItem i WHERE i.restaurant.id=:restaurantId AND i.menuDate=:date")
     List<MenuItem> getAllWithDate(@Param("restaurantId") int restaurantId, @Param("date") LocalDate date);
 

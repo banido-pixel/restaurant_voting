@@ -8,14 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface RestaurantRepository extends BaseRepository<Restaurant> {
-
-    @Query("SELECT new com.github.banido_pixel.restaurant_voting.to.RestaurantTo(r.id, r.name, (" +
-            "SELECT COUNT(v.date) FROM Vote v WHERE v.date=current_date AND v.restaurant.id=r.id)) FROM Restaurant r")
-    List<RestaurantTo> getAllWithVotes();
 
     @Query("SELECT new com.github.banido_pixel.restaurant_voting.to.RestaurantTo(r.id, r.name, (" +
             "SELECT COUNT(v.date) FROM Vote v WHERE v.date=:date AND v.restaurant.id=r.id)) FROM Restaurant r")

@@ -26,7 +26,7 @@ public class MenuItemService {
     }
 
     public List<MenuItem> getAllToday(int restaurantId) {
-        return menuItemRepository.getAllToday(restaurantId);
+        return menuItemRepository.getAllWithDate(restaurantId, LocalDate.now());
     }
 
     public List<MenuItem> getAllWithDate(int restaurantId, LocalDate date) {
