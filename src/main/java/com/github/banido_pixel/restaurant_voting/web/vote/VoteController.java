@@ -37,7 +37,7 @@ public class VoteController {
     @Autowired
     private Clock clock;
 
-    @GetMapping()
+    @GetMapping
     @Operation(summary = "getAll")
     public List<Vote> getAll() {
         int userId = SecurityUtil.authId();
@@ -74,7 +74,7 @@ public class VoteController {
         checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
     }
 
-    @PostMapping()
+    @PostMapping
     @Operation(summary = "create")
     public ResponseEntity<Vote> createWithLocation(@RequestParam int restaurantId) {
         int userId = SecurityUtil.authId();
