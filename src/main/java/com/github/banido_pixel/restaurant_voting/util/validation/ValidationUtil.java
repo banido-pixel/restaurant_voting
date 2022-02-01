@@ -14,6 +14,8 @@ import java.time.LocalTime;
 @UtilityClass
 public class ValidationUtil {
 
+    public static final LocalTime UPDATE_END_TIME = LocalTime.of(11, 0);
+
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
             throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must be new (id=null)");
@@ -29,10 +31,10 @@ public class ValidationUtil {
         }
     }
 
-    public static void assureTimeValid(String entity, String operationType, Clock clock) {
+    public static void assureTimeValid(Clock clock) {
         LocalTime time = LocalTime.now(clock);
-        if (time.isAfter(LocalTime.of(11, 0))) {
-            throw new IllegalTimeException(entity + " cannot be " + operationType + "d after 11:00");
+        if (time.isAfter(UPDATE_END_TIME)) {
+            throw new IllegalTimeException("Vote cannot be updated after " + UPDATE_END_TIME);
         }
     }
 

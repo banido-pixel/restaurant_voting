@@ -70,7 +70,7 @@ public class VoteController {
         log.info("update vote {} for user {} for restaurant {}", vote, userId, restaurantId);
         assureIdConsistent(vote, id);
         Assert.notNull(vote, "vote must not be null");
-        assureTimeValid(Vote.class.getSimpleName(), "update", clock);
+        assureTimeValid(clock);
         checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
     }
 
@@ -80,7 +80,6 @@ public class VoteController {
         int userId = SecurityUtil.authId();
         log.info("create vote for user {} for restaurant {}", userId, restaurantId);
         Vote vote = new Vote();
-        assureTimeValid(Vote.class.getSimpleName(), "create", clock);
         Vote created = voteService.save(vote, userId, restaurantId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
