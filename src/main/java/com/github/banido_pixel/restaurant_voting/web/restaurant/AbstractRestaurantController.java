@@ -30,13 +30,13 @@ public abstract class AbstractRestaurantController {
 
     public List<RestaurantTo> getAllWithVotes() {
         log.info("getAll restaurants");
-        return restaurantRepository.getAllWithVotes().orElseThrow()
+        return restaurantRepository.getAllWithVotes()
                 .stream().sorted(Comparator.comparing(RestaurantTo::getVotesAmount).reversed()).toList();
     }
 
     public List<RestaurantTo> getAllWithVotesWithDate(LocalDate date) {
         log.info("getAll restaurants with votes with date {}", date);
-        return restaurantRepository.getAllWithVotesWithDate(date).orElseThrow()
+        return restaurantRepository.getAllWithVotesWithDate(date)
                 .stream().sorted(Comparator.comparing(RestaurantTo::getVotesAmount).reversed()).toList();
     }
 

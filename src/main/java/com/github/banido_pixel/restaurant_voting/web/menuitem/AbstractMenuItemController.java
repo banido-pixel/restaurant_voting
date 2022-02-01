@@ -22,21 +22,20 @@ public abstract class AbstractMenuItemController {
 
     public List<MenuItem> getAllToday(int restaurantId) {
         log.info("getAll today menu items for restaurant with id = {}", restaurantId);
-        return menuItemService.getAllToday(restaurantId).orElseThrow()
+        return menuItemService.getAllToday(restaurantId)
                 .stream().sorted(Comparator.comparing(NamedEntity::getName)).toList();
     }
 
     public List<MenuItem> getAllWithDate(int restaurantId, LocalDate date) {
         log.info("getAll menu items with date {} for restaurant with id = {}", date, restaurantId);
-        return menuItemService.getAllWithDate(restaurantId, date).orElseThrow()
+        return menuItemService.getAllWithDate(restaurantId, date)
                 .stream().sorted(Comparator.comparing(NamedEntity::getName)).toList();
     }
 
     public List<MenuItem> getAll(int restaurantId) {
         log.info("getAll menu items for restaurant with id = {}", restaurantId);
-        return menuItemService.getAll(restaurantId).orElseThrow()
-                .stream().sorted(Comparator.comparing(MenuItem::getMenuDate).reversed()
-                        .thenComparing(NamedEntity::getName)).toList();
+        return menuItemService.getAll(restaurantId).stream().sorted(Comparator.comparing(MenuItem::getMenuDate).reversed()
+                .thenComparing(NamedEntity::getName)).toList();
     }
 
     public MenuItem get(int id, int restaurantId) {
