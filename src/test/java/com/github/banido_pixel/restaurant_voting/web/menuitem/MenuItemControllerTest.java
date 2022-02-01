@@ -7,14 +7,14 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.*;
-import static com.github.banido_pixel.restaurant_voting.web.menuitem.ProfileMenuItemController.REST_URL;
+import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemController.REST_URL;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class ProfileMenuItemControllerTest extends AbstractControllerTest {
+class MenuItemControllerTest extends AbstractControllerTest {
 
     static final String TEST_URL = REST_URL.replace("{restaurantId}", RESTAURANT_ID + "");
 

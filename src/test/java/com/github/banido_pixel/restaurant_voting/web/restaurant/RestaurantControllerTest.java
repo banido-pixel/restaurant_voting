@@ -12,12 +12,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class ProfileRestaurantControllerTest extends AbstractControllerTest {
+class RestaurantControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getAll() throws Exception {
-        perform(MockMvcRequestBuilders.get(ProfileRestaurantController.REST_URL))
+        perform(MockMvcRequestBuilders.get(RestaurantController.REST_URL))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_MATCHER.contentJson(restaurants));
@@ -26,7 +26,7 @@ class ProfileRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void get() throws Exception {
-        perform(MockMvcRequestBuilders.get(ProfileRestaurantController.REST_URL + RESTAURANT_ID))
+        perform(MockMvcRequestBuilders.get(RestaurantController.REST_URL + RESTAURANT_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(RESTAURANT_MATCHER.contentJson(restaurant1));
@@ -35,7 +35,7 @@ class ProfileRestaurantControllerTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void getNotFound() throws Exception {
-        perform(MockMvcRequestBuilders.get(ProfileRestaurantController.REST_URL + NOT_FOUND))
+        perform(MockMvcRequestBuilders.get(RestaurantController.REST_URL + NOT_FOUND))
                 .andDo(print())
                 .andExpect(status().isNotFound());
     }
