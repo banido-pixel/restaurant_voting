@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.time.Clock;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.*;
@@ -41,7 +42,7 @@ public class VoteController {
     public List<Vote> getAll() {
         int userId = SecurityUtil.authId();
         log.info("get vote history for user {}", userId);
-        return voteService.getAll(userId);
+        return voteService.getAll(userId).stream().sorted(Comparator.comparing(Vote::getDate)).toList();
     }
 
     @GetMapping("{id}")

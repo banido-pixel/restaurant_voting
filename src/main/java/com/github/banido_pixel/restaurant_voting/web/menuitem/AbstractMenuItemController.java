@@ -1,6 +1,7 @@
 package com.github.banido_pixel.restaurant_voting.web.menuitem;
 
 import com.github.banido_pixel.restaurant_voting.model.MenuItem;
+import com.github.banido_pixel.restaurant_voting.model.NamedEntity;
 import com.github.banido_pixel.restaurant_voting.service.MenuItemService;
 import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
@@ -20,17 +22,21 @@ public abstract class AbstractMenuItemController {
 
     public List<MenuItem> getAllToday(int restaurantId) {
         log.info("getAll today menu items for restaurant with id = {}", restaurantId);
-        return menuItemService.getAllToday(restaurantId).orElseThrow();
+        return menuItemService.getAllToday(restaurantId).orElseThrow()
+                .stream().sorted(Comparator.comparing(NamedEntity::getName)).toList();
     }
 
     public List<MenuItem> getAllWithDate(int restaurantId, LocalDate date) {
         log.info("getAll menu items with date {} for restaurant with id = {}", date, restaurantId);
-        return menuItemService.getAllWithDate(restaurantId, date).orElseThrow();
+        return menuItemService.getAllWithDate(restaurantId, date).orElseThrow()
+                .stream().sorted(Comparator.comparing(NamedEntity::getName)).toList();
     }
 
     public List<MenuItem> getAll(int restaurantId) {
         log.info("getAll menu items for restaurant with id = {}", restaurantId);
-        return menuItemService.getAll(restaurantId).orElseThrow();
+        return menuItemService.getAll(restaurantId).orElseThrow()
+                .stream().sorted(Comparator.comparing(MenuItem::getMenuDate).reversed()
+                        .thenComparing(NamedEntity::getName)).toList();
     }
 
     public MenuItem get(int id, int restaurantId) {

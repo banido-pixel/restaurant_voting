@@ -6,10 +6,12 @@ import com.github.banido_pixel.restaurant_voting.to.RestaurantTo;
 import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,17 +25,19 @@ public abstract class AbstractRestaurantController {
 
     public List<Restaurant> getAll() {
         log.info("getAll restaurants");
-        return restaurantRepository.findAll();
+        return restaurantRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     public List<RestaurantTo> getAllWithVotes() {
         log.info("getAll restaurants");
-        return restaurantRepository.getAllWithVotes().orElseThrow();
+        return restaurantRepository.getAllWithVotes().orElseThrow()
+                .stream().sorted(Comparator.comparing(RestaurantTo::getVotesAmount).reversed()).toList();
     }
 
     public List<RestaurantTo> getAllWithVotesWithDate(LocalDate date) {
         log.info("getAll restaurants with votes with date {}", date);
-        return restaurantRepository.getAllWithVotesWithDate(date).orElseThrow();
+        return restaurantRepository.getAllWithVotesWithDate(date).orElseThrow()
+                .stream().sorted(Comparator.comparing(RestaurantTo::getVotesAmount).reversed()).toList();
     }
 
     public ResponseEntity<Restaurant> get(int id) {

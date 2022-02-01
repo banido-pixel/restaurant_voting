@@ -25,6 +25,6 @@ class ProfileMenuItemControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MENU_ITEM_MATCHER.contentJson(menuItem1, menuItem2, menuItem3));
+                .andExpect(MENU_ITEM_MATCHER.contentJson(menuItemsToday));
     }
 }
