@@ -42,7 +42,7 @@ public abstract class AbstractRestaurantController {
 
     public ResponseEntity<Restaurant> get(int id) {
         log.info("get restaurant by id = {}", id);
-        return ResponseEntity.of(Optional.of(restaurantRepository.findById(id).orElseThrow()));
+        return ResponseEntity.of(restaurantRepository.findById(id));
     }
 
     public void delete(int id) {

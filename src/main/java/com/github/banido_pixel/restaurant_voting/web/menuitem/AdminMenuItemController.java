@@ -27,7 +27,7 @@ public class AdminMenuItemController extends AbstractMenuItemController {
     }
 
     @GetMapping("by-date")
-    @Operation(summary = "getAllWithDate")
+    @Operation(summary = "getAllByDate")
     public List<MenuItem> getAllWithDate(@PathVariable int restaurantId,
                                          @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getAllWithDate(restaurantId, date);
