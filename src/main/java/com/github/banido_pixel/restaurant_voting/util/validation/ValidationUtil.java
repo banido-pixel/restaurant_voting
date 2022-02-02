@@ -1,24 +1,23 @@
 package com.github.banido_pixel.restaurant_voting.util.validation;
 
 import com.github.banido_pixel.restaurant_voting.HasId;
-import com.github.banido_pixel.restaurant_voting.error.IllegalRequestDataException;
 import com.github.banido_pixel.restaurant_voting.error.IllegalTimeException;
-import com.github.banido_pixel.restaurant_voting.error.NotFoundException;
 import lombok.experimental.UtilityClass;
 import org.springframework.core.NestedExceptionUtils;
 import org.springframework.lang.NonNull;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.Clock;
 import java.time.LocalTime;
 
 @UtilityClass
 public class ValidationUtil {
 
-    public static final LocalTime UPDATE_END_TIME = LocalTime.of(11, 0);
+    public static final LocalTime UPDATE_END_TIME = LocalTime.of(23, 0);
 
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
-            throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must be new (id=null)");
+            throw new EntityNotFoundException(bean.getClass().getSimpleName() + " must be new (id=null)");
         }
     }
 
@@ -27,7 +26,7 @@ public class ValidationUtil {
         if (bean.isNew()) {
             bean.setId(id);
         } else if (bean.id() != id) {
-            throw new IllegalRequestDataException(bean.getClass().getSimpleName() + " must has id=" + id);
+            throw new EntityNotFoundException(bean.getClass().getSimpleName() + " must has id=" + id);
         }
     }
 
@@ -40,7 +39,7 @@ public class ValidationUtil {
 
     public static void checkModification(int count, int id) {
         if (count == 0) {
-            throw new IllegalRequestDataException("Entity with id=" + id + " not found");
+            throw new EntityNotFoundException("Entity with id=" + id + " not found");
         }
     }
 
@@ -60,7 +59,7 @@ public class ValidationUtil {
 
     public static void checkNotFound(boolean found, String msg) {
         if (!found) {
-            throw new NotFoundException("Not found entity with " + msg);
+            throw new EntityNotFoundException("Not found entity with " + msg);
         }
     }
 

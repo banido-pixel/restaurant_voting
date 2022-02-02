@@ -64,16 +64,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return createResponseEntity(getDefaultBody(request, ex.getOptions(), null), ex.getStatus());
     }
 
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> persistException(WebRequest request, EntityNotFoundException ex) {
+    @ExceptionHandler({EntityNotFoundException.class, NoSuchElementException.class})
+    public ResponseEntity<?> notFoundException(WebRequest request, Exception ex) {
         log.error("EntityNotFoundException: {}", ex.getMessage());
         return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.UNPROCESSABLE_ENTITY);
-    }
-
-    @ExceptionHandler(NoSuchElementException.class)
-    public ResponseEntity<?> notFoundException(WebRequest request, NoSuchElementException ex) {
-        log.error("NoSuchElementException: {}", ex.getMessage());
-        return createResponseEntity(getDefaultBody(request, ErrorAttributeOptions.of(MESSAGE), null), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
