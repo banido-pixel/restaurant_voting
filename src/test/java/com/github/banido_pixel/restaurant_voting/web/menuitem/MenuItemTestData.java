@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class MenuItemTestData {
     public static final MatcherFactory.Matcher<MenuItem> MENU_ITEM_MATCHER =
-            MatcherFactory.usingEqualsComparator(MenuItem.class);
+            MatcherFactory.usingIgnoringFieldsComparator(MenuItem.class, "restaurant");
 
     public static final int MENU_ITEM_ID = 1;
     public static final String MENU_DATE = LocalDate.of(2022, 1, 11).toString();
