@@ -16,6 +16,9 @@ Build a voting system for deciding where to have lunch.
 
 Each restaurant provides a new menu each day.
 
+For project launch in command-line:
+`mvn spring-boot:run`
+
 Swagger:
 * http://localhost:8080/swagger-ui.html
 * http://localhost:8080/v3/api-docs
