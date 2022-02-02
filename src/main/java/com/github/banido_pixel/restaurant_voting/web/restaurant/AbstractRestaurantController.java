@@ -53,14 +53,12 @@ public abstract class AbstractRestaurantController {
     public void update(Restaurant restaurant, int id) {
         log.info("update restaurant {}", restaurant);
         ValidationUtil.assureIdConsistent(restaurant, id);
-        Assert.notNull(restaurant, "restaurant must not be null");
         checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.id());
     }
 
     public Restaurant create(Restaurant restaurant) {
         log.info("create restaurant {}", restaurant);
         ValidationUtil.checkNew(restaurant);
-        Assert.notNull(restaurant, "restaurant must not be null");
         return restaurantRepository.save(restaurant);
     }
 }

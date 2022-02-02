@@ -67,7 +67,6 @@ public class VoteController {
         int restaurantId = voteTo.getRestaurantId();
         log.info("update vote {} for user {} for restaurant {}", voteTo, authUser.id(), restaurantId);
         assureIdConsistent(voteTo, id);
-        Assert.notNull(voteTo, "vote must not be null");
         assureTimeValid(clock);
         voteService.update(voteTo, authUser.id());
     }

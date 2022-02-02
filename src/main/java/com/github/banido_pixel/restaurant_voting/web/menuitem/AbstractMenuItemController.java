@@ -51,14 +51,12 @@ public abstract class AbstractMenuItemController {
     public void update(MenuItem menuItem, int id, int restaurantId) {
         log.info("update menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.assureIdConsistent(menuItem, id);
-        Assert.notNull(menuItem, "menu item must not be null");
         checkNotFoundWithId(menuItemService.save(menuItem, restaurantId), id);
     }
 
     public MenuItem create(MenuItem menuItem, int restaurantId) {
         log.info("create menu item {} for restaurant with id = {}", menuItem, restaurantId);
         ValidationUtil.checkNew(menuItem);
-        Assert.notNull(menuItem, "menu item must not be null");
         return menuItemService.save(menuItem, restaurantId);
     }
 }
