@@ -5,6 +5,7 @@ import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository
 import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
 import com.github.banido_pixel.restaurant_voting.to.VoteTo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,17 +18,12 @@ import static com.github.banido_pixel.restaurant_voting.util.VoteUtil.getTos;
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Service
+@RequiredArgsConstructor
 public class VoteService {
 
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
-
-    public VoteService(VoteRepository voteRepository, RestaurantRepository restaurantRepository, UserRepository userRepository) {
-        this.voteRepository = voteRepository;
-        this.restaurantRepository = restaurantRepository;
-        this.userRepository = userRepository;
-    }
 
     public List<VoteTo> getAll(int userId) {
         return getTos(voteRepository.getAll(userId)).stream().sorted(Comparator.comparing(VoteTo::getDate)).toList();

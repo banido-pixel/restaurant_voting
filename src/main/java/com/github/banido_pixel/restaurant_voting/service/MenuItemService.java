@@ -3,6 +3,7 @@ package com.github.banido_pixel.restaurant_voting.service;
 import com.github.banido_pixel.restaurant_voting.model.MenuItem;
 import com.github.banido_pixel.restaurant_voting.repository.MenuItemRepository;
 import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,15 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MenuItemService {
 
     private final MenuItemRepository menuItemRepository;
     private final RestaurantRepository restaurantRepository;
-
-    public MenuItemService(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository) {
-        this.menuItemRepository = menuItemRepository;
-        this.restaurantRepository = restaurantRepository;
-    }
 
     public Optional<MenuItem> get(int id, int restaurantId) {
         return menuItemRepository.get(id, restaurantId);
