@@ -14,8 +14,11 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface VoteRepository extends BaseRepository<Vote> {
 
-    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id=:id AND v.user.id=:userId")
+    @Query("SELECT v FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
     Optional<Vote> get(@Param("id") int id, @Param("userId") int userId);
+
+    @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id=:id AND v.user.id=:userId")
+    Optional<Vote> getTo(@Param("id") int id, @Param("userId") int userId);
 
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.date=:date AND v.user.id=:userId")
     Optional<Vote> getByDate(@Param("date") LocalDate date, @Param("userId") int userId);

@@ -33,7 +33,7 @@ public class VoteService {
     }
 
     public VoteTo getTo(int id, int userId) {
-        return createTo(get(id, userId));
+        return createTo(voteRepository.getTo(id, userId).orElseThrow());
     }
 
     public Vote get(int id, int userId) {
