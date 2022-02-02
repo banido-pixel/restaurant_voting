@@ -6,6 +6,7 @@ import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
 import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -44,12 +45,14 @@ public class VoteService {
         return createTo(voteRepository.getByDate(date, userId).orElseThrow());
     }
 
+    @Transactional
     public void update (VoteTo voteTo, int userId) {
         Vote vote = get(voteTo.id(), userId);
         setRestaurantFromTo(vote, voteTo.getRestaurantId());
         checkNotFoundWithId(voteRepository.save(vote), vote.id());
     }
 
+    @Transactional
     public Vote create (VoteTo voteTo, int userId) {
         Vote vote = new Vote();
         vote.setDate(LocalDate.now());

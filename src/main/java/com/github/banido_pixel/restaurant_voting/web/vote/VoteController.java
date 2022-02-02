@@ -63,7 +63,6 @@ public class VoteController {
     }
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "update")
     public void update(@Valid @RequestBody VoteTo voteTo, @PathVariable int id) {
