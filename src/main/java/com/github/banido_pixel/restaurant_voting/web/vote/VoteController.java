@@ -2,6 +2,7 @@ package com.github.banido_pixel.restaurant_voting.web.vote;
 
 import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.service.VoteService;
+import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import com.github.banido_pixel.restaurant_voting.web.SecurityUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
@@ -39,48 +40,49 @@ public class VoteController {
 
     @GetMapping
     @Operation(summary = "getAll")
-    public List<Vote> getAll() {
+    public List<VoteTo> getAll() {
         int userId = SecurityUtil.authId();
         log.info("get vote history for user {}", userId);
-        return voteService.getAll(userId).stream().sorted(Comparator.comparing(Vote::getDate)).toList();
+        return voteService.getAll(userId);
     }
 
     @GetMapping("{id}")
     @Operation(summary = "get")
-    public Vote get(@PathVariable int id) {
+    public VoteTo get(@PathVariable int id) {
         int userId = SecurityUtil.authId();
         log.info("get vote history for user {}", userId);
-        return voteService.get(id, userId).orElseThrow();
+        return voteService.getTo(id, userId);
     }
 
     @GetMapping("by-date")
     @Operation(summary = "getByDate")
-    public Vote getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+    public VoteTo   getByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         int userId = SecurityUtil.authId();
         log.info("get vote history for user {}", userId);
-        return voteService.getByDate(date, userId).orElseThrow();
+        return voteService.getByDate(date, userId);
     }
 
     @PutMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "update")
-    public void update(@Valid @RequestBody Vote vote, @PathVariable int id, @RequestParam int restaurantId) {
+    public void update(@Valid @RequestBody VoteTo voteTo, @PathVariable int id) {
         int userId = SecurityUtil.authId();
-        log.info("update vote {} for user {} for restaurant {}", vote, userId, restaurantId);
-        assureIdConsistent(vote, id);
-        Assert.notNull(vote, "vote must not be null");
+        int restaurantId = voteTo.getRestaurantId();
+        log.info("update vote {} for user {} for restaurant {}", voteTo, userId, restaurantId);
+        assureIdConsistent(voteTo, id);
+        Assert.notNull(voteTo, "vote must not be null");
         assureTimeValid(clock);
-        checkNotFoundWithId(voteService.save(vote, userId, restaurantId), id);
+        voteService.update(voteTo, userId);
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "create")
-    public ResponseEntity<Vote> createWithLocation(@RequestParam int restaurantId) {
+    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody VoteTo voteTo) {
         int userId = SecurityUtil.authId();
+        int restaurantId = voteTo.getRestaurantId();
         log.info("create vote for user {} for restaurant {}", userId, restaurantId);
-        Vote vote = new Vote();
-        Vote created = voteService.save(vote, userId, restaurantId);
+        Vote created = voteService.create(voteTo, userId);
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "{id}")

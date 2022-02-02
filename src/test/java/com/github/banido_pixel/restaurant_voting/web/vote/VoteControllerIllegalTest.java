@@ -1,16 +1,15 @@
 package com.github.banido_pixel.restaurant_voting.web.vote;
 
-import com.github.banido_pixel.restaurant_voting.model.Vote;
-import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
+import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
 import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 import com.github.banido_pixel.restaurant_voting.web.FixedIllegalClockConfig;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.UPDATE_END_TIME;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
@@ -27,7 +26,7 @@ class VoteControllerIllegalTest extends AbstractControllerTest {
     @Test
     @WithUserDetails(value = USER_MAIL)
     void updateAfterAllowedTime() throws Exception {
-        Vote updated = VoteTestData.getUpdated();
+        VoteTo updated = VoteTestData.getUpdated();
         updated.setId(null);
         perform(MockMvcRequestBuilders.put(REST_URL + VoteTestData.VOTE_ID)
                 .param("restaurantId", RESTAURANT_ID + 1 + "")

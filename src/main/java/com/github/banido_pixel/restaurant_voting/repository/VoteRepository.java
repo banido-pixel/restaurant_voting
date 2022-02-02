@@ -14,15 +14,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface VoteRepository extends BaseRepository<Vote> {
 
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Vote v WHERE v.id=:id AND v.user.id=:userId")
-    int delete(int id, int userId);
-
-    default void deleteExisted(int id, int userId) {
-        ValidationUtil.checkModification(delete(id, userId), id);
-    }
-
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.id=:id AND v.user.id=:userId")
     Optional<Vote> get(@Param("id") int id, @Param("userId") int userId);
 

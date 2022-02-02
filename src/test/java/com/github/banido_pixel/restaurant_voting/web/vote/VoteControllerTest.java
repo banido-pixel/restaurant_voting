@@ -2,7 +2,9 @@ package com.github.banido_pixel.restaurant_voting.web.vote;
 
 import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
+import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
+import com.github.banido_pixel.restaurant_voting.util.VoteUtil;
 import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 import com.github.banido_pixel.restaurant_voting.web.FixedLegalClockConfig;
 import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
@@ -36,7 +38,7 @@ class VoteControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(VOTE_MATCHER.contentJson(userVotes));
+                .andExpect(TO_MATCHER.contentJson(userVotes));
     }
 
     @Test
@@ -47,13 +49,13 @@ class VoteControllerTest extends AbstractControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(VOTE_MATCHER.contentJson(userVote2));
+                .andExpect(TO_MATCHER.contentJson(userVote2));
     }
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void update() throws Exception {
-        Vote updated = getUpdated();
+        VoteTo updated = getUpdated();
         updated.setId(null);
         perform(MockMvcRequestBuilders.put(REST_URL + VOTE_ID)
                 .param("restaurantId", RESTAURANT_ID + 1 + "")
@@ -61,14 +63,14 @@ class VoteControllerTest extends AbstractControllerTest {
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        VOTE_MATCHER.assertMatch(voteRepository.getById(VOTE_ID), getUpdated());
+        TO_MATCHER.assertMatch(VoteUtil.createTo(voteRepository.getById(VOTE_ID)), getUpdated());
     }
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void createWithLocation() throws Exception {
         voteRepository.deleteExisted(VOTE_ID);
-        Vote newVote = getNew();
+        VoteTo newVote = getNew();
         ResultActions actions = perform(MockMvcRequestBuilders.post(REST_URL)
                 .param("restaurantId", "" + RESTAURANT_ID)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -77,14 +79,14 @@ class VoteControllerTest extends AbstractControllerTest {
         Vote created = VOTE_MATCHER.readFromJson(actions);
         int newId = created.id();
         newVote.setId(newId);
-        VOTE_MATCHER.assertMatch(created, newVote);
-        VOTE_MATCHER.assertMatch(voteRepository.getById(newId), newVote);
+        TO_MATCHER.assertMatch(VoteUtil.createTo(created), newVote);
+        TO_MATCHER.assertMatch(VoteUtil.createTo(voteRepository.getById(newId)), newVote);
     }
 
     @Test
     @WithUserDetails(value = USER_MAIL)
     void createSecondPerDay() throws Exception {
-        Vote newVote = getNew();
+        VoteTo newVote = getNew();
         perform(MockMvcRequestBuilders.post(REST_URL)
                 .param("restaurantId", "" + RESTAURANT_ID)
                 .contentType(MediaType.APPLICATION_JSON)

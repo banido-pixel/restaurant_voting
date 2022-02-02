@@ -4,11 +4,16 @@ import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository;
 import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
+import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+
+import static com.github.banido_pixel.restaurant_voting.util.VoteUtil.createTo;
+import static com.github.banido_pixel.restaurant_voting.util.VoteUtil.getTos;
+import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class VoteService {
@@ -23,31 +28,37 @@ public class VoteService {
         this.userRepository = userRepository;
     }
 
-    public List<Vote> getAll(int userId) {
-        return voteRepository.getAll(userId);
+    public List<VoteTo> getAll(int userId) {
+        return getTos(voteRepository.getAll(userId)).stream().sorted(Comparator.comparing(VoteTo::getDate)).toList();
     }
 
-    public Optional<Vote> get(int id, int userId) {
-        return voteRepository.get(id, userId);
+    public VoteTo getTo(int id, int userId) {
+        return createTo(get(id, userId));
     }
 
-    public Optional<Vote> getByDate(LocalDate date, int userId) {
-        return voteRepository.getByDate(date, userId);
+    public Vote get(int id, int userId) {
+        return voteRepository.get(id, userId).orElseThrow();
     }
 
-    public void delete(int id, int userId) {
-        voteRepository.deleteExisted(id, userId);
+    public VoteTo getByDate(LocalDate date, int userId) {
+        return createTo(voteRepository.getByDate(date, userId).orElseThrow());
     }
 
-    public Vote save(Vote vote, int userId, int restaurantId) {
-        if (!vote.isNew() && get(vote.id(), userId).isEmpty()) {
-            return null;
-        }
-        if (vote.isNew()) {
-            vote.setDate(LocalDate.now());
-            vote.setUser(userRepository.findById(userId).orElseThrow());
-        }
-        vote.setRestaurant(restaurantRepository.findById(restaurantId).orElseThrow());
+    public void update (VoteTo voteTo, int userId) {
+        Vote vote = get(voteTo.id(), userId);
+        setRestaurantFromTo(vote, voteTo.getRestaurantId());
+        checkNotFoundWithId(voteRepository.save(vote), vote.id());
+    }
+
+    public Vote create (VoteTo voteTo, int userId) {
+        Vote vote = new Vote();
+        vote.setDate(LocalDate.now());
+        vote.setUser(userRepository.findById(userId).orElseThrow());
+        setRestaurantFromTo(vote, voteTo.getRestaurantId());
         return voteRepository.save(vote);
+    }
+
+    private void setRestaurantFromTo(Vote vote, Integer voteTo) {
+        vote.setRestaurant(restaurantRepository.findById(voteTo).orElseThrow());
     }
 }
