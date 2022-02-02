@@ -1,6 +1,5 @@
 package com.github.banido_pixel.restaurant_voting.web.vote;
 
-import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.service.VoteService;
 import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import com.github.banido_pixel.restaurant_voting.web.AuthUser;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -73,11 +71,11 @@ public class VoteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "create")
-    public ResponseEntity<Vote> createWithLocation(@Valid @RequestBody VoteTo voteTo,
-                                                   @AuthenticationPrincipal AuthUser authUser) {
+    public ResponseEntity<VoteTo> createWithLocation(@Valid @RequestBody VoteTo voteTo,
+                                                     @AuthenticationPrincipal AuthUser authUser) {
         int restaurantId = voteTo.getRestaurantId();
         log.info("create vote for user {} for restaurant {}", authUser.id(), restaurantId);
-        Vote created = voteService.create(voteTo, authUser.id());
+        VoteTo created = voteService.create(voteTo, authUser.id());
 
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "{id}")

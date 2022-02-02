@@ -43,7 +43,7 @@ public class MenuItemService {
         if (!menuItem.isNew() && get(menuItem.id(), restaurantId).isEmpty()) {
             return null;
         }
-        menuItem.setRestaurant(restaurantRepository.findById(restaurantId).orElseThrow());
+        menuItem.setRestaurant(restaurantRepository.getById(restaurantId));
         return menuItemRepository.save(menuItem);
     }
 }

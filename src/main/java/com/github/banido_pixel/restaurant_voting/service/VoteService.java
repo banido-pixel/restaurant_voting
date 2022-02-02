@@ -42,22 +42,23 @@ public class VoteService {
     }
 
     @Transactional
-    public void update (VoteTo voteTo, int userId) {
+    public void update(VoteTo voteTo, int userId) {
         Vote vote = get(voteTo.id(), userId);
         setRestaurantFromTo(vote, voteTo.getRestaurantId());
         checkNotFoundWithId(voteRepository.save(vote), vote.id());
     }
 
     @Transactional
-    public Vote create (VoteTo voteTo, int userId) {
+    public VoteTo create(VoteTo voteTo, int userId) {
         Vote vote = new Vote();
         vote.setDate(LocalDate.now());
-        vote.setUser(userRepository.findById(userId).orElseThrow());
+        vote.setUser(userRepository.getById(userId));
         setRestaurantFromTo(vote, voteTo.getRestaurantId());
-        return voteRepository.save(vote);
+        voteRepository.save(vote);
+        return createTo(vote);
     }
 
     private void setRestaurantFromTo(Vote vote, Integer voteTo) {
-        vote.setRestaurant(restaurantRepository.findById(voteTo).orElseThrow());
+        vote.setRestaurant(restaurantRepository.getById(voteTo));
     }
 }

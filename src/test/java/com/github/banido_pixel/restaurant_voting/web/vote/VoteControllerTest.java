@@ -1,6 +1,5 @@
 package com.github.banido_pixel.restaurant_voting.web.vote;
 
-import com.github.banido_pixel.restaurant_voting.model.Vote;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
 import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
@@ -15,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
@@ -68,6 +68,7 @@ class VoteControllerTest extends AbstractControllerTest {
 
     @Test
     @WithUserDetails(value = USER_MAIL)
+    @Transactional
     void createWithLocation() throws Exception {
         voteRepository.deleteExisted(VOTE_ID);
         VoteTo newVote = getNew();
@@ -76,10 +77,10 @@ class VoteControllerTest extends AbstractControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newVote)))
                 .andExpect(status().isCreated());
-        Vote created = VOTE_MATCHER.readFromJson(actions);
+        VoteTo created = TO_MATCHER.readFromJson(actions);
         int newId = created.id();
         newVote.setId(newId);
-        TO_MATCHER.assertMatch(VoteUtil.createTo(created), newVote);
+        TO_MATCHER.assertMatch(created, newVote);
         TO_MATCHER.assertMatch(VoteUtil.createTo(voteRepository.getById(newId)), newVote);
     }
 
