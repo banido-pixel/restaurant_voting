@@ -6,20 +6,26 @@ import com.github.banido_pixel.restaurant_voting.repository.UserRepository;
 import com.github.banido_pixel.restaurant_voting.repository.VoteRepository;
 import com.github.banido_pixel.restaurant_voting.to.VoteTo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
 import static com.github.banido_pixel.restaurant_voting.util.VoteUtil.createTo;
 import static com.github.banido_pixel.restaurant_voting.util.VoteUtil.getTos;
+import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.assureTimeValid;
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Service
 @RequiredArgsConstructor
 public class VoteService {
+
+    @Autowired
+    private Clock clock;
 
     private final VoteRepository voteRepository;
     private final RestaurantRepository restaurantRepository;
@@ -43,6 +49,7 @@ public class VoteService {
 
     @Transactional
     public void update(VoteTo voteTo, int userId) {
+        assureTimeValid(clock);
         Vote vote = get(voteTo.id(), userId);
         setRestaurantFromTo(vote, voteTo.getRestaurantId());
         checkNotFoundWithId(voteRepository.save(vote), vote.id());

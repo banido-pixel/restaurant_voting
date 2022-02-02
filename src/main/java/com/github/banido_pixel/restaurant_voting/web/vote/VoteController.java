@@ -33,9 +33,6 @@ public class VoteController {
     @Autowired
     private VoteService voteService;
 
-    @Autowired
-    private Clock clock;
-
     @GetMapping
     @Operation(summary = "getAll")
     public List<VoteTo> getAll(@AuthenticationPrincipal AuthUser authUser) {
@@ -65,7 +62,6 @@ public class VoteController {
         int restaurantId = voteTo.getRestaurantId();
         log.info("update vote {} for user {} for restaurant {}", voteTo, authUser.id(), restaurantId);
         assureIdConsistent(voteTo, id);
-        assureTimeValid(clock);
         voteService.update(voteTo, authUser.id());
     }
 

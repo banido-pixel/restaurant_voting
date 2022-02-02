@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @UtilityClass
 public class ValidationUtil {
 
-    public static final LocalTime UPDATE_END_TIME = LocalTime.of(23, 0);
+    public static final LocalTime UPDATE_END_TIME = LocalTime.of(11, 0);
 
     public static void checkNew(HasId bean) {
         if (!bean.isNew()) {
