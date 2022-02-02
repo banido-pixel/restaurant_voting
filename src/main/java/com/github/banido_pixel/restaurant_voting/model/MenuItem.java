@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "menu_item",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "restaurant_id", "menu_date"},
+        uniqueConstraints = @UniqueConstraint(columnNames = {"restaurant_id", "menu_date", "name"},
                 name = "uk_restaurant_menu_datetime"))
 public class MenuItem extends NamedEntity {
 
