@@ -39,6 +39,12 @@ public class AdminRestaurantController extends AbstractRestaurantController {
         return super.getAllWithVotesWithDate(date);
     }
 
+    @GetMapping("with-menu")
+    @Operation(summary = "getAll with menu")
+    public List<Restaurant> getAllWithMenuItems() {
+        return super.getAllWithMenuItems();
+    }
+
     @GetMapping("{id}")
     @Operation(summary = "get")
     public ResponseEntity<Restaurant> get(@PathVariable int id) {

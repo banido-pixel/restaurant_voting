@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping(value = AdminMenuItemController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminMenuItemController extends AbstractMenuItemController {
 
-    static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu-items/";
+    public static final String REST_URL = "/api/admin/restaurants/{restaurantId}/menu-items/";
 
     @GetMapping("today")
     @Operation(summary = "getAllToday")

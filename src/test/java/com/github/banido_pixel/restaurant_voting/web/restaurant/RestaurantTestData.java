@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class RestaurantTestData {
     public static final MatcherFactory.Matcher<Restaurant> RESTAURANT_MATCHER =
-            MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class);
+            MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class, "menuItems");
 
     public static final int RESTAURANT_ID = 1;
     public static final int NOT_FOUND = 120;

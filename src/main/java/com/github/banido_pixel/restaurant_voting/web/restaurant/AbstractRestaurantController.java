@@ -11,12 +11,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.checkNotFoundWithId;
 
@@ -31,6 +29,12 @@ public abstract class AbstractRestaurantController {
     public List<Restaurant> getAll() {
         log.info("getAll restaurants");
         return restaurantRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));
+    }
+
+    @Cacheable
+    public List<Restaurant> getAllWithMenuItems() {
+        log.info("getAll restaurants with menu");
+        return restaurantRepository.getAllWithMenuItems();
     }
 
     public List<RestaurantTo> getAllWithVotes() {

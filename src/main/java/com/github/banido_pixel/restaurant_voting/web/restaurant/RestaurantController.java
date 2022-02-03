@@ -23,6 +23,12 @@ public class RestaurantController extends AbstractRestaurantController {
         return super.getAll();
     }
 
+    @GetMapping("with-menu")
+    @Operation(summary = "getAll with menu")
+    public List<Restaurant> getAllWithMenuItems() {
+        return super.getAllWithMenuItems();
+    }
+
     @GetMapping("with-rating-today")
     @Operation(summary = "getAllWithVotes")
     public List<RestaurantTo> getAllWithVotes() {
