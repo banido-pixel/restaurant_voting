@@ -16,12 +16,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
 import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.assureIdConsistent;
-import static com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil.assureTimeValid;
 
 @RestController
 @Slf4j

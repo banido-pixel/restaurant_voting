@@ -19,7 +19,7 @@ public class RestaurantTestData {
     public static final Restaurant restaurant2 = new Restaurant(RESTAURANT_ID + 1, "Белый аист");
     public static final Restaurant restaurant3 = new Restaurant(RESTAURANT_ID + 2, "Прага");
 
-    public static final List<Restaurant> restaurants = Stream.of(restaurant1,restaurant2,restaurant3)
+    public static final List<Restaurant> restaurants = Stream.of(restaurant1, restaurant2, restaurant3)
             .sorted(Comparator.comparing(NamedEntity::getName)).toList();
 
     public static Restaurant getUpdated() {

@@ -6,8 +6,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.*;
 import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemController.REST_URL;
+import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.MENU_ITEM_MATCHER;
+import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.menuItemsToday;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.RESTAURANT_ID;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.USER_MAIL;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

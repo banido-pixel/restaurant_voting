@@ -10,11 +10,11 @@ import java.util.List;
 @UtilityClass
 public class VoteUtil {
 
-    public static List<VoteTo> getTos (Collection<Vote> votes) {
+    public static List<VoteTo> getTos(Collection<Vote> votes) {
         return votes.stream().map(VoteUtil::createTo).toList();
     }
 
-    public static VoteTo createTo (Vote vote) {
-        return new VoteTo(vote.id(),vote.getDate(),vote.getRestaurant().id());
+    public static VoteTo createTo(Vote vote) {
+        return new VoteTo(vote.id(), vote.getDate(), vote.getRestaurant().id());
     }
 }

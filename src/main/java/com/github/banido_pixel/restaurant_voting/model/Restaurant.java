@@ -1,8 +1,6 @@
 package com.github.banido_pixel.restaurant_voting.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.banido_pixel.restaurant_voting.HasId;
 import lombok.Getter;

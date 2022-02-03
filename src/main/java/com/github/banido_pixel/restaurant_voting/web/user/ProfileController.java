@@ -7,8 +7,6 @@ import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
 import com.github.banido_pixel.restaurant_voting.web.AuthUser;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

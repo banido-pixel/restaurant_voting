@@ -1,8 +1,6 @@
 package com.github.banido_pixel.restaurant_voting.repository;
 
 import com.github.banido_pixel.restaurant_voting.model.Vote;
-import com.github.banido_pixel.restaurant_voting.util.validation.ValidationUtil;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;

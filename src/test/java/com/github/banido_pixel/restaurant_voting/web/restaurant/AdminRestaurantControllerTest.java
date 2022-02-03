@@ -1,13 +1,10 @@
 package com.github.banido_pixel.restaurant_voting.web.restaurant;
 
-import com.github.banido_pixel.restaurant_voting.model.MenuItem;
 import com.github.banido_pixel.restaurant_voting.model.Restaurant;
 import com.github.banido_pixel.restaurant_voting.repository.RestaurantRepository;
 import com.github.banido_pixel.restaurant_voting.util.JsonUtil;
 import com.github.banido_pixel.restaurant_voting.web.AbstractControllerTest;
 import com.github.banido_pixel.restaurant_voting.web.GlobalExceptionHandler;
-import com.github.banido_pixel.restaurant_voting.web.menuitem.AdminMenuItemController;
-import com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,10 +12,6 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.List;
-
-import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.MENU_ITEM_MATCHER;
-import static com.github.banido_pixel.restaurant_voting.web.menuitem.MenuItemTestData.menuItemsToday;
 import static com.github.banido_pixel.restaurant_voting.web.restaurant.RestaurantTestData.*;
 import static com.github.banido_pixel.restaurant_voting.web.user.UserTestData.ADMIN_MAIL;
 import static org.hamcrest.Matchers.containsString;

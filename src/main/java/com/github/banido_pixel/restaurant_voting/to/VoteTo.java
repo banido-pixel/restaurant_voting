@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Value
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class VoteTo extends BaseTo{
+public class VoteTo extends BaseTo {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     LocalDate date;
